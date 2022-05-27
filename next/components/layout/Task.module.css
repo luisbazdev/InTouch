@@ -1,0 +1,94 @@
+.task{
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: 320px;
+    height: fit-content;
+    row-gap: 5px;
+    /* work here... */
+}
+
+.task_details{
+    display: flex;
+    align-items: center;
+}
+
+.task_content{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    column-gap: 4px;
+    /* margin-top: 4px; */
+}
+
+.task_branch{
+    font-size: medium;
+    /* color: rgb(255, 65, 65); */
+}
+
+.task_task{
+    font-size: 16px;
+}
+
+.task_note{
+    min-height: 55px;
+    padding: 6px;
+    background-color: #2e2e2e;
+}
+
+.task_note_note{
+    color: #8f8c8a;
+    font-weight: medium;
+}
+
+.task_button{
+    width: 5px;
+    height: 5px;
+}
+
+.task_card:hover{
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 2px;
+}
+
+.task_card:hover .task_note{
+    background-color: #4b4b4b;
+}
+
+.task_card:hover .task_note_note{
+    color: #c2bebb;
+}
+
+.task_finish_container{
+    position: absolute;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.task_finish{
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    color: white;
+}
+
+.selected{
+    border: 2px solid white;
+    border-radius: 2px;
+}
+
+.selected .task_note{
+    background-color: #4b4b4b;
+}
+
+.selected .task_note_note{
+    color: #c2bebb;
+}

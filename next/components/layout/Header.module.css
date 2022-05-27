@@ -1,0 +1,6 @@
+.header{
+    padding: 3px 8px;
+    grid-column: 2 / span 3;
+    background-color: #212121;
+    border-bottom: 1px solid #ffffff33;
+}

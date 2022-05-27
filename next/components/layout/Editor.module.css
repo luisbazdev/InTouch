@@ -1,0 +1,48 @@
+.editor{
+    display: grid;
+    grid-template-columns: 70px minmax(900px, 900px) auto;
+    /* grid-template-columns: minmax(40px, 40px) minmax(800px, 1000px) auto; */
+    height: 100%;
+}
+
+.info{
+    min-height: 80px;
+    grid-column: 1 / span 3;
+    padding: 6px 10px;
+    background-color: #212121;
+    color: white;
+    border-bottom: 1px solid #ffffff33;
+}
+
+.empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 600px;
+    padding: 35px 30px;
+}
+
+.tasks{
+    height: 100%;
+    overflow-y: auto;
+    padding: 35px 30px;
+    display: grid;
+    align-content: flex-start;
+    justify-items: center;
+    row-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.branches{
+    overflow-y: auto;
+    /* min-width: 600px; */
+    height: 100%;
+    padding: 35px 30px;
+}
+
+.content{
+    height: 100%;
+    overflow-y: auto;
+    grid-row: 1 / span 2;
+    /* border-right: 1px solid #ffffff33; */
+}

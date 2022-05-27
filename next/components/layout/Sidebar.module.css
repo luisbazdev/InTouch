@@ -1,0 +1,52 @@
+.sidebar{
+    border-right: 1px solid #ffffff33;
+    background-color: #161616;
+    grid-row: 1 / span 3;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.group img{
+    padding: 10px 10px;
+    width: 69px;
+    height: 69px;
+    border-radius: 20%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.search{
+    margin-top: auto;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    background-color: #333333;
+    border-top: 1px solid rgba(236, 236, 236, 0.11);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.create_container{
+    width: 100%;
+    height: 62px;
+    display: flex;
+    border-bottom: 1px solid rgba(236, 236, 236, 0.11);
+    background-color: #333333;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.create_button{
+    width: 20px;
+    height: 20px;
+}
