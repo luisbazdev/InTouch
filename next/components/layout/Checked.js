@@ -21,7 +21,6 @@ export default function Checked({group, styles}){
             }
     }, [group])
     
-
     if(tasks?.length <= 0)
         return (
             <div className={styles.empty}>
@@ -30,10 +29,12 @@ export default function Checked({group, styles}){
         )
 
     return (
-        <div className={styles.tasks}>
+        <div className={styles.content}>
+            <div className={styles.checked}>
             {tasks?.map(task => {
                 return <Task key={task.id} task={task}/>
             })}
+            </div>
         </div>
     )
 }
