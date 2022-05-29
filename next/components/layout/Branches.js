@@ -23,8 +23,10 @@ export default function Branches({group, styles}){
     
     if(branches?.length <= 0)
         return (
-            <div className={styles.empty}>
-                <p>There are no branches yet!</p>
+            <div className={styles.content}>
+                <div className={styles.empty}>
+                    <p>There are no branches yet!</p>
+                </div>
             </div>
         )
 

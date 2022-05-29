@@ -29,8 +29,10 @@ export default function Tasks({group, styles}){
 
     if(tasks?.length <= 0)
         return (
-            <div className={styles.empty}>
-                <p>There are no tasks to complete yet!</p>
+            <div className={styles.content}>
+                <div className={styles.empty}>
+                    <p>There are no tasks to complete yet!</p>
+                </div>
             </div>
         )
 

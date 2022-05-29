@@ -23,8 +23,10 @@ export default function Checked({group, styles}){
     
     if(tasks?.length <= 0)
         return (
-            <div className={styles.empty}>
-                <p>There are no completed tasks yet!</p>
+            <div className={styles.content}>
+                <div className={styles.empty}>
+                    <p>There are no completed tasks yet!</p>
+                </div>
             </div>
         )
 
