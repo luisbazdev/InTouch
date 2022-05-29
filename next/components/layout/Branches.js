@@ -5,14 +5,18 @@ import { db } from '../../firebase';
 
 import Branch from './Branch'
 
+import ReactLoading from 'react-loading';
+
 export default function Branches({group, styles}){
     const [branches, setBranches] = useState([])
+    const [loading, setLoading] = useState(true)
 
         useEffect(() => {
             if(group != null){
                 const unsubscribe = onSnapshot(collection(db, `groups/${group}/branches`), 
                 (snapshot) => {
                   setBranches(snapshot.docs)
+                  setLoading(false)
                 })
 
                 return () => {
@@ -21,6 +25,13 @@ export default function Branches({group, styles}){
             }
     }, [group])
     
+    if(loading)
+        return (
+            <div className={styles.loading}>
+                <ReactLoading type='spin'/>
+            </div>
+        )
+
     if(branches?.length <= 0)
         return (
             <div className={styles.content}>

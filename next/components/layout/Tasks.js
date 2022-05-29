@@ -9,8 +9,11 @@ import { GroupContext } from "../../contexts/GroupContext";
 
 import {FaCheck} from 'react-icons/fa'
 
+import ReactLoading from 'react-loading';
+
 export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const { selected, setSelected, setSeeCheckModal } = React.useContext(GroupContext)
 
@@ -18,7 +21,8 @@ export default function Tasks({group, styles}){
         if(group != null){
             const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', false), orderBy('createdAt', 'desc')), 
             (snapshot) => {
-              setTasks(snapshot.docs)
+                setTasks(snapshot.docs)
+                setLoading(false)
             }) 
             
             return () => {
@@ -26,6 +30,13 @@ export default function Tasks({group, styles}){
             }
         }
     }, [group])
+
+    if(loading)
+        return (
+            <div className={styles.loading}>
+                <ReactLoading type='spin'/>
+            </div>
+        )
 
     if(tasks?.length <= 0)
         return (

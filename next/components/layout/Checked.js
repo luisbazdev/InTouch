@@ -5,14 +5,18 @@ import { db } from '../../firebase';
 
 import Task from './Task'
 
+import ReactLoading from 'react-loading';
+
 export default function Checked({group, styles}){
     const [tasks, setTasks] = useState(null)
+    const [loading, setLoading] = useState(true)
 
         useEffect(() => {
             if(group != null){
                 const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', true), orderBy('finishedAt', 'desc')), 
                 (snapshot) => {
                   setTasks(snapshot.docs)
+                  setLoading(false)
                 })
 
                 return () => {
@@ -21,6 +25,13 @@ export default function Checked({group, styles}){
             }
     }, [group])
     
+    if(loading)
+        return (
+            <div className={styles.loading}>
+                <ReactLoading type='spin'/>
+            </div>
+        )
+
     if(tasks?.length <= 0)
         return (
             <div className={styles.content}>
