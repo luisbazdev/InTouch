@@ -22,11 +22,9 @@ export default function Editor({group, session}){
             setSeeChecked={setSeeChecked} 
             setSeeBranches={setSeeBranches}/>
 
-            {/* <div className={styles.content}> */}
-                {seeHome && <Tasks group={group} styles={styles}/>}
-                {seeChecked && <Checked group={group} styles={styles}/>}
-                {seeBranches && <Branches group={group} styles={styles}/>}    
-            {/* </div> */}
+            {seeHome && <Tasks group={group} styles={styles}/>}
+            {seeChecked && <Checked group={group} styles={styles}/>}
+            {seeBranches && <Branches group={group} styles={styles}/>}    
 
             <Menu group={group} session={session}/>
         </div>

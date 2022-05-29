@@ -34,20 +34,6 @@ export default function Tasks({group, styles}){
             </div>
         )
 
-    // return (
-    //     <div className={styles.tasks}>
-    //         <button onClick={() => setSeeCheckModal(true)}>Check</button>
-    //         {tasks?.map(task => {
-    //             return <Task 
-    //             key={task.id} 
-    //             task={task} 
-    //             selected={selected.find((t) => t.id == task.id)} 
-    //             selectedTasks={selected} 
-    //             setSelected={setSelected}/>
-    //         })}
-    //     </div>
-    // )
-
     return (
         <div className={styles.content}>
             <div className={styles.buttons}>

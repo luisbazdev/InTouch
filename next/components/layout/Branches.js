@@ -21,8 +21,6 @@ export default function Branches({group, styles}){
             }
     }, [group])
     
-
-
     if(branches?.length <= 0)
         return (
             <div className={styles.empty}>
@@ -31,10 +29,13 @@ export default function Branches({group, styles}){
         )
 
     return (
-        <div className={styles.branches}>
-            {branches?.map(branch => {
-                return <Branch key={branch.id} branch={branch}/>
-            })}
+        <div className={styles.content}>
+            <div className={styles.branches}>
+                {branches?.map(branch => {
+                    return <Branch key={branch.id} branch={branch}/>
+                })}
+            </div>
         </div>
+
     )
 }
