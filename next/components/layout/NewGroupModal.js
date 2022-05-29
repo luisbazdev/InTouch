@@ -64,7 +64,6 @@ export default function NewGroupModal({session, close}){
                 <div className={styles.close} onClick={() => close(false)} >
                     <AiOutlineClose className={styles.icon}/>
                 </div>
-                {/* <button onClick={() => close(false)}>Close</button> */}
                 <div className={styles.option}>
                     <h3>Group Name</h3>
                     <input type='text' onChange={(e) => setName(e.target.value)}/>
@@ -76,7 +75,6 @@ export default function NewGroupModal({session, close}){
                 <div className={styles.option}>
                     <h3>Group Image</h3>
                     <input type='file' onChange={addPicture}/>
-                    {/* <textarea rows='12' onChange={(e) => setDescription(e.target.value)}/> */}
                 </div>
                 <button className={styles.button} onClick={() => createGroup(name, description, session.uid)}>Create Group</button>
             </div>

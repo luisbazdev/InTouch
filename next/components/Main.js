@@ -10,11 +10,18 @@ import Editor from "./layout/Editor";
 import Header from "./layout/Header";
 
 import NewGroupModal from "./layout/NewGroupModal";
+import CheckModal from "./layout/CheckModal";
 
 export default function Main({group}){
 
     const { session, loading } = React.useContext(AuthContext)
-    const { seeCreateGroup, setSeeCreateGroup } = React.useContext(GroupContext)
+
+    const { selected,
+            setSelected,
+            seeCreateGroup, 
+            setSeeCreateGroup,
+            seeCheckModal,
+            setSeeCheckModal } = React.useContext(GroupContext)
 
     {/*Users can see groups where they're
     not in by joining its url and getting
@@ -28,6 +35,7 @@ export default function Main({group}){
     return (
         <div className={styles.app}>
             { seeCreateGroup && <NewGroupModal session={session} close={setSeeCreateGroup}/>}
+            { seeCheckModal && <CheckModal group={group} session={session} close={setSeeCheckModal} selected={selected} setSelected={setSelected}/>}
             
             <Sidebar session={session}/>
             <Header group={group}/>

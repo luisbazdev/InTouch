@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     min-width: 320px;
-    max-width: 320px;
+    max-width: 380px;
+    /* max-width: 100%; */
     height: fit-content;
     row-gap: 5px;
     /* work here... */
@@ -47,9 +48,14 @@
     height: 5px;
 }
 
+/* .task_card{
+    border: 2px solid blue;
+    border-radius: 2px;
+} */
+
 .task_card:hover{
     cursor: pointer;
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 2px;
 }
 
@@ -61,27 +67,9 @@
     color: #c2bebb;
 }
 
-.task_finish_container{
-    position: absolute;
-    left: -30px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 2px;
-}
-
-.task_finish{
-    width: 13px;
-    height: 13px;
-    position: absolute;
-    color: white;
-}
-
 .selected{
-    border: 2px solid white;
+    cursor: pointer;
+    border: 1px solid white;
     border-radius: 2px;
 }
 

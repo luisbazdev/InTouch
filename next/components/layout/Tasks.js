@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-import { doc, updateDoc, collection, onSnapshot, query, where, orderBy, serverTimestamp } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 import Task from './Task'
 
+import { GroupContext } from "../../contexts/GroupContext";
+
+import {FaCheck} from 'react-icons/fa'
+
 export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
-    const [selected, setSelected] = useState(null)
 
-    function finish(id){
-        const taskRef = doc(db, 'groups', `${group}/tasks/${id}`);
-
-        updateDoc(taskRef, {
-            completed: true,
-            finishedAt: serverTimestamp()
-        })
-    }
+    const { selected, setSelected, setSeeCheckModal } = React.useContext(GroupContext)
 
     useEffect(() => {
         if(group != null){
@@ -30,7 +26,7 @@ export default function Tasks({group, styles}){
             }
         }
     }, [group])
-    
+
     if(tasks?.length <= 0)
         return (
             <div className={styles.empty}>
@@ -38,11 +34,39 @@ export default function Tasks({group, styles}){
             </div>
         )
 
+    // return (
+    //     <div className={styles.tasks}>
+    //         <button onClick={() => setSeeCheckModal(true)}>Check</button>
+    //         {tasks?.map(task => {
+    //             return <Task 
+    //             key={task.id} 
+    //             task={task} 
+    //             selected={selected.find((t) => t.id == task.id)} 
+    //             selectedTasks={selected} 
+    //             setSelected={setSelected}/>
+    //         })}
+    //     </div>
+    // )
+
     return (
-        <div className={styles.tasks}>
-            {tasks?.map(task => {
-                return <Task key={task.id} task={task} selected={selected == task.id} setSelected={setSelected} finish={finish}/>
-            })}
+        <div className={styles.content}>
+            <div className={styles.buttons}>
+                <div className={styles.button_check} onClick={() => setSeeCheckModal(true)}>
+                    <FaCheck className={styles.button_check_icon}/>
+                    <p>Check</p>
+                </div>
+
+            </div>
+            <div className={styles.tasks}>
+                {tasks?.map(task => {
+                    return <Task 
+                    key={task.id} 
+                    task={task} 
+                    selected={selected.find((t) => t.id == task.id)} 
+                    selectedTasks={selected} 
+                    setSelected={setSelected}/>
+                })}
+            </div>
         </div>
     )
 }
