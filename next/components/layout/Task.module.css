@@ -45,6 +45,17 @@
     border-bottom-right-radius: 5px;
 }
 
+.task_note_empty{
+    font-size: medium;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 79px;
+    max-height: 79px;
+    padding: 5px;
+}
+
 .task_selected{
     animation-name: selected;
     animation-duration: 1000ms;
