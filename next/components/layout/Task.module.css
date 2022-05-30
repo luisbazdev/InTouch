@@ -1,82 +1,79 @@
 .task{
+    width: 380px;
+    height: min-content;
     display: flex;
     flex-direction: column;
-    min-width: 320px;
-    max-width: 380px;
-    /* max-width: 100%; */
-    height: fit-content;
-    row-gap: 5px;
-    /* work here... */
+    cursor: pointer;
+    transition: background-color 2s 1000ms
 }
 
-.task_details{
-    display: flex;
-    align-items: center;
+.task:hover .task_desc{
+    height: min-content;
 }
 
-.task_content{
-    position: relative;
-    display: flex;
-    align-items: center;
+.task:hover .task_body{
+    max-height: min-content;
+    background-color: #3b3b3b;
+}
+
+.task_header{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding: 5px;
-    column-gap: 4px;
-    /* margin-top: 4px; */
+    display: flex;
+    flex-direction: column;
 }
 
 .task_branch{
-    font-size: medium;
-    /* color: rgb(255, 65, 65); */
+    font-weight: bold;
+    font-size: small;
 }
 
-.task_task{
-    font-size: 16px;
+.task_desc{
+    overflow-y: hidden;
+    height: 18px;
 }
 
-.task_note{
-    min-height: 55px;
-    padding: 6px;
-    background-color: #2e2e2e;
+.task_body{
+    transition: all 100ms linear;
+    overflow-y: hidden;
+    min-height: 79px;
+    max-height: 79px;
+    padding: 5px;
+    background-color: #2a2a2a;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
-.task_note_note{
-    color: #8f8c8a;
-    font-weight: medium;
-}
-
-.task_button{
-    width: 5px;
-    height: 5px;
-}
-
-/* .task_card{
-    border: 2px solid blue;
-    border-radius: 2px;
-} */
-
-.task_card:hover{
-    cursor: pointer;
+.task_selected{
+    animation-name: selected;
+    animation-duration: 1000ms;
+    animation-timing-function: linear;
     border: 1px solid white;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
-.task_card:hover .task_note{
-    background-color: #4b4b4b;
+.task_selected .task_desc{
+    height: min-content;
 }
 
-.task_card:hover .task_note_note{
-    color: #c2bebb;
+.task_selected .task_body{
+    max-height: 100%;
+    height: min-content;
+    background-color: #3b3b3b;
 }
 
-.selected{
-    cursor: pointer;
-    border: 1px solid white;
-    border-radius: 2px;
-}
-
-.selected .task_note{
-    background-color: #4b4b4b;
-}
-
-.selected .task_note_note{
-    color: #c2bebb;
+@keyframes selected{
+    0%{
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+    25%{
+        border: 1px solid rgba(255, 255, 255, 55);
+    }
+    50%{
+        border: 1px solid rgba(255, 255, 255, 155);
+    }
+    100%{
+        border: 1px solid rgba(255, 255, 255, 255);
+    }
 }
