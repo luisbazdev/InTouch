@@ -1,7 +1,7 @@
 .app{
     display: grid;
     grid-template-rows: minmax(50px, 55px) 1fr 1fr;
-    grid-template-columns: minmax(70px, 70px) 1fr 1fr;
+    grid-template-columns: minmax(85px, 85px) 1fr 1fr;
     height: 100%;
 }
 

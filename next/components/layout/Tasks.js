@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../../firebase';
@@ -7,13 +7,16 @@ import Task from './Task'
 
 import { GroupContext } from "../../contexts/GroupContext";
 
-import {FaCheck} from 'react-icons/fa'
+import {FaCheck, FaTrash} from 'react-icons/fa'
 
 import ReactLoading from 'react-loading';
 
 export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const checkRef = useRef(null)
+    const removeRef = useRef(null)
 
     const { selected, setSelected, setSeeCheckModal } = React.useContext(GroupContext)
 
@@ -34,7 +37,7 @@ export default function Tasks({group, styles}){
     if(loading)
         return (
             <div className={styles.loading}>
-                <ReactLoading type='spin'/>
+                <ReactLoading type='spin' color='#33be33'/>
             </div>
         )
 
@@ -49,14 +52,25 @@ export default function Tasks({group, styles}){
 
     return (
         <div className={styles.content}>
-            <div className={styles.buttons}>
-                <div className={styles.button_check} onClick={() => setSeeCheckModal(true)}>
-                    <FaCheck className={styles.button_check_icon}/>
-                    <p>Check</p>
-                </div>
-
-            </div>
             <div className={styles.tasks}>
+                <div className={styles.options}>
+                    <div className={`${styles.button_check} ${selected.length <= 0 ? styles.disabled : ''}`}>
+                        <FaCheck className={styles.button_check_icon} onClick={() => checkRef.current.click()}/>
+                        <button 
+                        hidden
+                        ref={checkRef}
+                        disabled={selected.length <= 0}
+                        onClick={() => setSeeCheckModal(true)}>Check</button>
+                    </div>
+                    <div className={`${styles.button_check} ${selected.length <= 0 ? styles.disabled : ''}`}>
+                        <FaTrash className={styles.button_check_icon} onClick={() => removeRef.current.click()}/>
+                        <button 
+                        hidden
+                        ref={removeRef}
+                        disabled={selected.length <= 0}
+                        onClick={() => setSeeCheckModal(true)}>Check</button>
+                    </div>
+                </div>
                 {tasks?.map(task => {
                     return <Task 
                     key={task.id} 

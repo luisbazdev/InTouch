@@ -12,8 +12,9 @@
 }
 
 .button{
-    padding: 5px 10px;
-    background-color: #333333;
+    padding: 10px 10px;
+    min-width: 160px;
+    background-color: #5add5a;
     display: flex;
     justify-content: center;
     column-gap: 3px;
@@ -21,8 +22,9 @@
 }
 
 .button button{
-    font-size: small;
-    font-weight: 800;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 900;
 }
 
 .overview{

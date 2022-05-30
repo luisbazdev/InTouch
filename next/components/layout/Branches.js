@@ -28,7 +28,7 @@ export default function Branches({group, styles}){
     if(loading)
         return (
             <div className={styles.loading}>
-                <ReactLoading type='spin'/>
+                <ReactLoading type='spin' color='#33be33'/>
             </div>
         )
 

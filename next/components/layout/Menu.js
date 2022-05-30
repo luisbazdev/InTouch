@@ -32,7 +32,6 @@ export default function Menu({group, session}){
 
             {seeNewTask && <MenuNewTask
                group={group}
-               styles={styles}
                session={session}
                seeNewTask={seeNewTask}
                setSeeNewTask={setSeeNewTask}

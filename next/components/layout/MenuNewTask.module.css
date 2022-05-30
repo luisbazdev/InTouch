@@ -1,0 +1,74 @@
+.new{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.new_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+}
+
+.new_button{
+    padding: 10px 10px;
+    min-width: 160px;
+    background-color: #5add5a;
+    display: flex;
+    justify-content: center;
+    column-gap: 3px;
+    border-radius: 3px;
+}
+
+.new_button button{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.new textarea{
+    padding: 10px;
+    color: #000000;
+    width: 100%;
+    min-height: 250px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f0f0;
+}
+
+.new select{
+    outline: none;
+    background-color: transparent;
+}
+
+.new option{
+    outline: none;
+    background-color: transparent;
+}
+
+.new_task p, .new_note p, .new_branch p{
+    font-weight: 600;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #5add5a;
+    background-color: #ffffff;
+}
+
+.new textarea:focus, .new input:focus{
+    outline: none;
+}
+
+.new_task select{
+    background-color: transparent;
+}
+
+.disabled{
+    background-color: #8afd8a;
+}
+
+.disabled button{
+    cursor: initial;
+}

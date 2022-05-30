@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from '../../firebase'
 
-export default function MenuNewTask({group, styles, session, seeNewTask, setSeeNewTask}){
+import styles from './MenuNewTask.module.css'
+
+export default function MenuNewTask({group, session, seeNewTask, setSeeNewTask}){
     const [branches, setBranches] = useState([])
 
     const [task, setTask] = useState('')
@@ -46,34 +48,44 @@ export default function MenuNewTask({group, styles, session, seeNewTask, setSeeN
     }
 
     return (
-        <section>
-            <button onClick={() => setSeeNewTask(!seeNewTask)}>Back</button>
-            <div className={styles.new_tasks}>
-                <div className={styles.new_task}>
-                    <h3>Task</h3>
-                    <textarea onChange={(e) => setTask(e.target.value)} cols='30' rows='5'></textarea>
+        <div className={styles.new}>
+            <div className={styles.new_options}>
+                <div className={`${styles.new_button} ${(!task || !taskNote || !taskBranch ) ? styles.disabled : '' }`}>
+                    <button 
+                    disabled={!task || !taskNote || !taskBranch}
+                    onClick={() => submitTask(task, taskNote, false, session.uid, taskBranch, taskColor)}
+                    className={styles.new_create}>Create task</button>
                 </div>
-                <div className={styles.new_task}>
-                    <h3>Note</h3>
-                    <textarea onChange={(e) => setTaskNote(e.target.value)} cols='30' rows='8'></textarea>
+                <div className={styles.new_button}>
+                    <button onClick={() => setSeeNewTask(!seeNewTask)}>Menu</button>
                 </div>
-                <div className={styles.new_task}>
-                    <h3>Branch</h3>
-                    <select onChange={(e) => {
-                        const task = JSON.parse(e.target.value)
-                        setTaskBranch(task.branch)
-                        setTaskColor(task.color)
-                    }}>
-                        {branches.map((branch) => {
-                            return <option key={branch.id} style={{color: branch.data().color}} 
-                                    value={`{"color": "${branch.data().color}", "branch": "${branch.data().branch}"}`}
-                                    >{branch.data().branch}</option>
-                        })}
-                    </select>
-                </div>
-                <button onClick={() => submitTask(task, taskNote, false, session.uid, taskBranch, taskColor)}
-                className={styles.button}>Create task</button>
             </div>
-        </section>
+
+            <div className={styles.new_task}>
+                <p>Task</p>
+                <textarea
+                onChange={(e) => setTask(e.target.value)}></textarea>
+            </div>
+            <div className={styles.new_note}>
+                <p>Note</p>
+                <textarea
+                onChange={(e) => setTaskNote(e.target.value)}></textarea>
+            </div>
+            <div className={styles.new_branch}>
+                {/* <p>Branch</p> */}
+                <select style={{color: taskColor}}
+                onChange={(e) => {
+                    const task = JSON.parse(e.target.value)
+                    setTaskBranch(task.branch)
+                    setTaskColor(task.color)
+                }}>
+                    {branches.map((branch) => {
+                        return <option key={branch.id} style={{color: branch.data().color}} 
+                                value={`{"color": "${branch.data().color}", "branch": "${branch.data().branch}"}`}
+                                >@{branch.data().branch}</option>
+                    })}
+                </select>
+            </div>
+        </div>
     )
 }

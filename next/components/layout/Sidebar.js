@@ -28,27 +28,29 @@ export default function Sidebar({session}){
                 unsubscribe()
             }
         }
-
     }, [session])
     
-
     return (
         <div className={styles.sidebar}>
-            <div className={styles.create_container} onClick={() => setSeeCreateGroup(true)}>
-                <AiOutlinePlus className={styles.create_button}/>
+            <div className={styles.create} onClick={() => setSeeCreateGroup(true)}>
+                <AiOutlinePlus className={styles.icon}/>
             </div>
-            {groups?.map((group) => {
-                return (
-                <div className={styles.group} key={group.id}>
-                    {/* use context to set seeHome to 'true' and 
-                    seeBranches to 'false' when changing group,
-                    or maybe not... */}
-                    <Link href={`/g/${group.id}`}><img src={group?.data()?.picture}/></Link>
-                </div>)
-            })}
-            <div className={styles.search}>
+            <div className={styles.groups}>
+                {/* use context to set seeHome to 'true' and 
+                seeBranches to 'false' when changing group,
+                or maybe not... */}
+                {groups?.map((group) => {
+                    return (
+                    <div className={styles.group} key={group.id}>
+
+                        <Link href={`/g/${group.id}`}><img src={group?.data()?.picture}/></Link>
+                    </div>)
+                })}
+            </div>
+
+            {/* <div className={styles.search}>
                 <AiOutlineSearch className={styles.button}/>
-            </div>
+            </div> */}
         </div>
     )
 }

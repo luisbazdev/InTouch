@@ -13,7 +13,7 @@ export default function Task({task, selected, selectedTasks, setSelected, disabl
               <p className={styles.task_desc}>{task.data().task}</p>
             </div>
             <div className={styles.task_body}>
-              {!task.data().note ? <p className={styles.task_note_empty}>Not Available</p> : <p className={styles.task_note}>{task.data().note}</p>}
+              {!task.data().note ? <p className={styles.task_note_empty}>No Note Available For This Task!</p> : <p className={styles.task_note}>{task.data().note}</p>}
             </div>
         </div>
     )

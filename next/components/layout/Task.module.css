@@ -13,7 +13,7 @@
 
 .task:hover .task_body{
     max-height: min-content;
-    background-color: #3b3b3b;
+    background-color: #f1f0f0;
 }
 
 .task_header{
@@ -40,14 +40,16 @@
     min-height: 79px;
     max-height: 79px;
     padding: 5px;
-    background-color: #2a2a2a;
+    color: #000000;
+    background-color: #ffffff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
 .task_note_empty{
-    font-size: medium;
-    font-weight: bold;
+    color: #7a7a7a;
+    font-size: small;
+    font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,7 +62,7 @@
     animation-name: selected;
     animation-duration: 1000ms;
     animation-timing-function: linear;
-    border: 1px solid white;
+    border: 1px solid rgba(199, 199, 199, 255);
     border-radius: 5px;
 }
 
@@ -71,20 +73,20 @@
 .task_selected .task_body{
     max-height: 100%;
     height: min-content;
-    background-color: #3b3b3b;
+    background-color: #f1f0f0;
 }
 
 @keyframes selected{
     0%{
-        border: 1px solid rgba(255, 255, 255, 0);
+        border: 1px solid rgba(199, 199, 199, 0);
     }
     25%{
-        border: 1px solid rgba(255, 255, 255, 55);
+        border: 1px solid rgba(199, 199, 199, 55);
     }
     50%{
-        border: 1px solid rgba(255, 255, 255, 155);
+        border: 1px solid rgba(199, 199, 199, 155);
     }
     100%{
-        border: 1px solid rgba(255, 255, 255, 255);
+        border: 1px solid rgba(199, 199, 199, 255);
     }
 }
