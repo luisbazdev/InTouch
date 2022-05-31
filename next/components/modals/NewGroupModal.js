@@ -4,6 +4,8 @@ import styles from './NewGroupModal.module.css';
 
 import { db, storage } from '../../firebase';
 
+import { nanoid } from 'nanoid'
+
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
@@ -14,15 +16,12 @@ export default function NewGroupModal({session, close}){
     const [description, setDescription] = useState('');
 
     const [picture, setPicture] = useState(null)
-    const [pictureName, setPictureName] = useState('')
 
     // Let users upload their group pictures
     // and set it in the 'picture' field down
     // in the createGroup function
     function addPicture(e){
-        
-        setPictureName(e.target.files[0].lastModified)
-
+    
         const reader = new FileReader()
 
         reader.readAsDataURL(e.target.files[0])
@@ -36,7 +35,7 @@ export default function NewGroupModal({session, close}){
         // Upload the picture (in the 'picture' variable)
         // to the storage, after that, insert the picture URL
         // in the document below
-        const imgRef = ref(storage, `groups/${pictureName}`)
+        const imgRef = ref(storage, `groups/${nanoid()}`)
 
         uploadString(imgRef, picture, 'data_url').then((snapshot) =>{
             // console.log(snapshot)
@@ -53,7 +52,6 @@ export default function NewGroupModal({session, close}){
             })
         })
 
-        setPictureName('')
         close(false)
         // redirect the user to the new group
     }
