@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './Menu.module.css'
 
 import MenuMain from "./MenuMain";
-import MenuNewTask from "./MenuNewTask";
-import MenuNewBranch from "./MenuNewBranch";
+
+import { GroupContext } from "../../contexts/GroupContext";
 
 export default function Menu({group, session}){
 
-    const [seeNewTask, setSeeNewTask] = useState(false)
-    const [seeNewBranch, setSeeNewBranch] = useState(false)
+    const { setSeeNewTaskModal, setSeeNewBranchModal } = React.useContext(GroupContext)
 
     // Better listen for group branches in
     // this component and if there are not,
@@ -24,26 +23,9 @@ export default function Menu({group, session}){
     // Also change the ColorPicker.
     return (
         <div className={styles.menu}>
-            {(!seeNewTask && !seeNewBranch) && <MenuMain 
-               seeNewTask={seeNewTask} 
-               setSeeNewTask={setSeeNewTask} 
-               seeNewBranch={seeNewBranch}
-               setSeeNewBranch={setSeeNewBranch}/>}
-
-            {seeNewTask && <MenuNewTask
-               group={group}
-               session={session}
-               seeNewTask={seeNewTask}
-               setSeeNewTask={setSeeNewTask}
-               />}
-
-            {seeNewBranch && <MenuNewBranch
-                group={group}
-                styles={styles}
-                session={session}
-                seeNewBranch={seeNewBranch}
-                setSeeNewBranch={setSeeNewBranch}
-            />}
+            <MenuMain 
+               setSeeNewTaskModal={setSeeNewTaskModal}
+               setSeeNewBranchModal={setSeeNewBranchModal}/>
         </div>
     )
 }

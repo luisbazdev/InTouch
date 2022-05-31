@@ -9,8 +9,10 @@ import Sidebar from "./layout/Sidebar";
 import Editor from "./layout/Editor";
 import Header from "./layout/Header";
 
-import NewGroupModal from "./layout/NewGroupModal";
-import CheckModal from "./layout/CheckModal";
+import NewTaskModal from "./modals/NewTaskModal";
+import NewBranchModal from "./modals/NewBranchModal";
+import NewGroupModal from "./modals/NewGroupModal";
+import CheckModal from "./modals/CheckModal";
 
 export default function Main({group}){
 
@@ -21,7 +23,11 @@ export default function Main({group}){
             seeCreateGroup, 
             setSeeCreateGroup,
             seeCheckModal,
-            setSeeCheckModal } = React.useContext(GroupContext)
+            setSeeCheckModal,
+            seeNewTaskModal,
+            setSeeNewTaskModal,
+            seeNewBranchModal,
+            setSeeNewBranchModal } = React.useContext(GroupContext)
 
     {/*Users can see groups where they're
     not in by joining its url and getting
@@ -34,9 +40,11 @@ export default function Main({group}){
 
     return (
         <div className={styles.app}>
+            { seeNewTaskModal && <NewTaskModal session={session} group={group} close={setSeeNewTaskModal}/>}
+            { seeNewBranchModal && <NewBranchModal session={session} group={group} close={setSeeNewBranchModal}/>}
             { seeCreateGroup && <NewGroupModal session={session} close={setSeeCreateGroup}/>}
-            { seeCheckModal && <CheckModal group={group} session={session} close={setSeeCheckModal} selected={selected} setSelected={setSelected}/>}
-            
+            { seeCheckModal && <CheckModal session={session} group={group} close={setSeeCheckModal} selected={selected} setSelected={setSelected}/>}
+
             <Sidebar session={session}/>
             <Header group={group}/>
             <div className={styles.main}>

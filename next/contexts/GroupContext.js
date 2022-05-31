@@ -7,6 +7,8 @@ const GroupProvider = ({children}) => {
 
     const [seeCreateGroup, setSeeCreateGroup] = useState(false)
     const [seeCheckModal, setSeeCheckModal] = useState(false)
+    const [seeNewTaskModal, setSeeNewTaskModal] = useState(false)
+    const [seeNewBranchModal, setSeeNewBranchModal] = useState(false)
 
     const data = {
         selected,
@@ -14,7 +16,11 @@ const GroupProvider = ({children}) => {
         seeCreateGroup,
         setSeeCreateGroup,
         seeCheckModal,
-        setSeeCheckModal
+        setSeeCheckModal,
+        seeNewTaskModal,
+        setSeeNewTaskModal,
+        seeNewBranchModal,
+        setSeeNewBranchModal
     }
 
     return (

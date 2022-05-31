@@ -1,14 +1,14 @@
 import styles from './MenuMain.module.css'
 
-export default function MenuMain({seeNewTask, setSeeNewTask, seeNewBranch, setSeeNewBranch}){
+export default function MenuMain({setSeeNewTaskModal, setSeeNewBranchModal}){
     return (
         <div className={styles.info}>
             <div className={styles.options}>
                 <div className={styles.button}>
-                    <button onClick={() => setSeeNewTask(!seeNewTask)}>Create new task</button>
+                    <button onClick={() => setSeeNewTaskModal(true)}>Create new task</button>
                 </div>
                 <div className={styles.button}>
-                    <button onClick={() => setSeeNewBranch(!seeNewBranch)}>Create new branch</button>
+                    <button onClick={() => setSeeNewBranchModal(true)}>Create new branch</button>
                 </div>
             </div>
             <p className={styles.overview}>

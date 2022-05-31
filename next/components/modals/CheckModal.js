@@ -3,7 +3,7 @@ import styles from './CheckModal.module.css'
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from '../../firebase'
 
-import Task from './Task';
+import Task from '../layout/Task';
 
 import { AiOutlineClose } from "react-icons/ai";
 
