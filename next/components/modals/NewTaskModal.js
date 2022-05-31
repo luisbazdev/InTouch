@@ -9,6 +9,9 @@ import Select from 'react-select'
 
 import ReactLoading from 'react-loading';
 
+import { AiOutlineClose } from 'react-icons/ai';
+
+
 export default function NewTaskModal({session, group, close}){
 
     const [loading, setLoading] = useState(true)
@@ -100,23 +103,25 @@ export default function NewTaskModal({session, group, close}){
     return (
         <div className={styles.bg}>
             <div className={styles.modal}>
-                <button onClick={() => close(false)}>Close</button>
                 <div className={styles.header}>
-                    <h3>Create A New Task</h3>
+                    <h3>Create a new task</h3>
+                    <div className={styles.close} onClick={() => close(false)} >
+                        <AiOutlineClose className={styles.icon}/>
+                    </div>
                 </div>
                 <div className={styles.container}>
-                    <p>Branch</p>
+                    <strong>Choose a branch</strong>
                     <Select options={options} styles={selectStyles} onChange={(task) => {
                         setTaskBranch(task.value)
                         setTaskColor(task.color)
                     }}/>
                 </div>
                 <div className={styles.container}>
-                    <p>Task</p>
+                    <strong>What's the task?</strong>
                     <input type='text' onChange={(e) => setTask(e.target.value)}/>
                 </div>
                 <div className={styles.container}>
-                    <p>Note</p>
+                    <strong>Optional notes</strong>
                     <textarea onChange={(e) => setTaskNote(e.target.value)}/>
                 </div>
                 <div className={styles.submit}>

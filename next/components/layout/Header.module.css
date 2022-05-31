@@ -1,7 +1,10 @@
 .header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 3px 8px;
     grid-column: 2 / span 3;
-    color: #000000;
+    color: #3f3d47;
     background-color: #ffffff;
     border-bottom: 1px solid #d6d6d6;
 }

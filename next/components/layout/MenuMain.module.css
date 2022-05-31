@@ -12,12 +12,13 @@
 }
 
 .button{
+    color: #ffffff;
     padding: 10px 10px;
-    min-width: 160px;
+    min-width: 130px;
     background-color: #5add5a;
     display: flex;
-    justify-content: center;
-    column-gap: 3px;
+    align-items: center;
+    column-gap: 5px;
     border-radius: 3px;
 }
 

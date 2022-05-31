@@ -4,6 +4,8 @@ import { SwatchesPicker } from 'react-color';
 import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from '../../firebase'
 
+import { AiOutlineClose } from 'react-icons/ai';
+
 import styles from './NewBranchModal.module.css'
 
 export default function NewBranchModal({session, group, close}){
@@ -30,17 +32,19 @@ export default function NewBranchModal({session, group, close}){
     return (
         <div className={styles.bg}>
             <div className={styles.modal}>
-                <button onClick={() => close(false)}>Close</button>
                 <div className={styles.header}>
-                    <h3>Create A New Branch</h3>
+                    <h3>Create a new branch</h3>
+                    <div className={styles.close} onClick={() => close(false)} >
+                        <AiOutlineClose className={styles.icon}/>
+                    </div>
                 </div>
                 <div className={styles.container}>
-                    <p>Branch Name</p>
-                    <input type='text' onChange={(e) => setBranchName(e.target.value)}/>
+                    <strong>What's the branch name?</strong>
+                    <input type='text' style={{color: branchColor}} onChange={(e) => setBranchName(e.target.value)}/>
                 </div>
-                <div className={styles.container}>
-                    <p>Branch Color</p>
-                    <SwatchesPicker onChange={(color) => setBranchColor(color.hex)}/>
+                <div className={styles.color}>
+                    <strong>Pick a color for the branch</strong>
+                    <SwatchesPicker width='100%' onChange={(color) => setBranchColor(color.hex)}/>
                 </div>
                 <div className={styles.submit}>
                     <button onClick={() => submitBranch(branchName, branchColor, session.uid)}>Create Branch</button>

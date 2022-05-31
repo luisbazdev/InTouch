@@ -21,12 +21,10 @@ export default function Header({group}){
     }
     }, [group])
     
-
-
     return (
         <div className={styles.header}>
-            <h2>{data[0]?.data().name}</h2>
-            <p>{data[0]?.data().description}</p>
+            <h3>{data[0]?.data().name}</h3>
+            <small>{data[0]?.data().description}</small>
         </div>
     )
 }
