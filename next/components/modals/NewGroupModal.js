@@ -11,11 +11,15 @@ import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
 import { AiOutlineClose } from "react-icons/ai";
 
+import { useRouter } from "next/router";
+
 export default function NewGroupModal({session, close}){
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
     const [picture, setPicture] = useState(null)
+
+    const router = useRouter()
 
     // Let users upload their group pictures
     // and set it in the 'picture' field down
@@ -48,7 +52,7 @@ export default function NewGroupModal({session, close}){
                     picture: URL,
                     members: [session.uid],
                     createdAt: serverTimestamp()
-                })
+                }).then(group => router.push(`/g/${group.id}`))
             })
         })
 
