@@ -67,18 +67,3 @@
 .task_selected:hover .task_body{
     background-color: #e8ffe3;
 }
-
-/* @keyframes selected{
-    0%{
-        border: 1px solid rgba(199, 199, 199, 0);
-    }
-    25%{
-        border: 1px solid rgba(199, 199, 199, 55);
-    }
-    50%{
-        border: 1px solid rgba(199, 199, 199, 155);
-    }
-    100%{
-        border: 1px solid rgba(199, 199, 199, 255);
-    }
-} */

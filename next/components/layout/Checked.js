@@ -7,6 +7,8 @@ import Task from './Task'
 
 import ReactLoading from 'react-loading';
 
+import Masonry from 'react-masonry-css'
+
 export default function Checked({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -44,9 +46,18 @@ export default function Checked({group, styles}){
     return (
         <div className={styles.content}>
             <div className={styles.checked}>
-            {tasks?.map(task => {
-                return <Task key={task.id} task={task} disabled={true}/>
-            })}
+            <Masonry
+                breakpointCols={2}
+                className={styles.masonry_grid}
+                columnClassName={styles.masonry_grid_column}>
+                {tasks?.map(task => {
+                    return <Task 
+                    key={task.id} 
+                    task={task}
+                    disabled={true} 
+                    />
+                })}
+            </Masonry>
             </div>
         </div>
     )

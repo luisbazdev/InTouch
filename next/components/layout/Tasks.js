@@ -11,6 +11,8 @@ import {FaCheck, FaTrash} from 'react-icons/fa'
 
 import ReactLoading from 'react-loading';
 
+import Masonry from 'react-masonry-css'
+
 export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -71,14 +73,19 @@ export default function Tasks({group, styles}){
                         onClick={() => setSeeRemoveModal(true)}></button>
                     </div>
                 </div>
-                {tasks?.map(task => {
-                    return <Task 
-                    key={task.id} 
-                    task={task} 
-                    selected={selected.find((t) => t.id == task.id)} 
-                    selectedTasks={selected} 
-                    setSelected={setSelected}/>
-                })}
+                <Masonry
+                    breakpointCols={2}
+                    className={styles.masonry_grid}
+                    columnClassName={styles.masonry_grid_column}>
+                    {tasks?.map(task => {
+                        return <Task 
+                        key={task.id} 
+                        task={task} 
+                        selected={selected.find((t) => t.id == task.id)} 
+                        selectedTasks={selected} 
+                        setSelected={setSelected}/>
+                    })}
+                </Masonry>
             </div>
         </div>
     )
