@@ -6,7 +6,7 @@ import { db, storage } from '../../firebase';
 
 import { nanoid } from 'nanoid'
 
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -42,7 +42,6 @@ export default function NewGroupModal({session, close}){
         const imgRef = ref(storage, `groups/${nanoid()}`)
 
         uploadString(imgRef, picture, 'data_url').then((snapshot) =>{
-            // console.log(snapshot)
             getDownloadURL(imgRef)
             .then((URL) => {
                 addDoc(collection(db, 'groups'), {
@@ -52,12 +51,23 @@ export default function NewGroupModal({session, close}){
                     picture: URL,
                     members: [session.uid],
                     createdAt: serverTimestamp()
-                }).then(group => router.push(`/g/${group.id}`))
+                }).then(group => {
+                    let collRef = collection(db, `${group.path}/branches`)
+                    let docRef = doc(collRef)
+
+                    setDoc(docRef, {
+                        branch: 'none',
+                        color: '#969696',
+                        owner: null,
+                        createdAt: serverTimestamp()
+                    })
+
+                    router.push(`/g/${group.id}`)
+                })
             })
         })
 
         close(false)
-        // redirect the user to the new group
     }
 
     return (
