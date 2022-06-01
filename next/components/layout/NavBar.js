@@ -10,6 +10,7 @@ export default function NavBar({seeHome, setSeeHome, seeChecked, setSeeChecked, 
                 setSeeHome(true)
                 setSeeChecked(false)
                 setSeeBranches(false)
+                setSeeRemoved(false)
             }}>
                 <FaHome className={`${styles.icon} ${seeHome ? styles.selected : ''}`}/>
             </div>
@@ -18,15 +19,17 @@ export default function NavBar({seeHome, setSeeHome, seeChecked, setSeeChecked, 
                 setSeeHome(false)
                 setSeeChecked(true)
                 setSeeBranches(false)
+                setSeeRemoved(false)
             }}>
                 <FaCheck className={`${styles.icon} ${seeChecked ? styles.selected : ''}`}/>
             </div>
             <div className={styles.icon_container}
-            // onClick={() => { 
-            //     setSeeHome(false)
-            //     setSeeChecked(true)
-            //     setSeeBranches(false)
-            // }}
+            onClick={() => { 
+                setSeeHome(false)
+                setSeeChecked(false)
+                setSeeBranches(false)
+                setSeeRemoved(true)
+            }}
             >
                 <FaTrash className={`${styles.icon} ${seeRemoved ? styles.selected : ''}`}/>
             </div>
@@ -35,6 +38,7 @@ export default function NavBar({seeHome, setSeeHome, seeChecked, setSeeChecked, 
                 setSeeHome(false)
                 setSeeChecked(false)
                 setSeeBranches(true)
+                setSeeRemoved(false)
             }} >
                 <FaCodeBranch className={`${styles.icon} ${seeBranches ? styles.selected : ''}`}/>
             </div>

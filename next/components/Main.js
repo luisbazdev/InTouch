@@ -13,6 +13,7 @@ import NewTaskModal from "./modals/NewTaskModal";
 import NewBranchModal from "./modals/NewBranchModal";
 import NewGroupModal from "./modals/NewGroupModal";
 import CheckModal from "./modals/CheckModal";
+import RemoveModal from "./modals/RemoveModal";
 
 export default function Main({group}){
 
@@ -27,7 +28,9 @@ export default function Main({group}){
             seeNewTaskModal,
             setSeeNewTaskModal,
             seeNewBranchModal,
-            setSeeNewBranchModal } = React.useContext(GroupContext)
+            setSeeNewBranchModal,
+            seeRemoveModal,
+            setSeeRemoveModal } = React.useContext(GroupContext)
 
     {/*Users can see groups where they're
     not in by joining its url and getting
@@ -44,6 +47,7 @@ export default function Main({group}){
             { seeNewBranchModal && <NewBranchModal session={session} group={group} close={setSeeNewBranchModal}/>}
             { seeCreateGroup && <NewGroupModal session={session} close={setSeeCreateGroup}/>}
             { seeCheckModal && <CheckModal session={session} group={group} close={setSeeCheckModal} selected={selected} setSelected={setSelected}/>}
+            { seeRemoveModal && <RemoveModal session={session} group={group} close={setSeeRemoveModal} selected={selected} setSelected={setSelected}/>}
 
             <Sidebar session={session}/>
             <Header group={group}/>

@@ -35,7 +35,8 @@ export default function NewTaskModal({session, group, close}){
             owner,
             branch,
             color,
-            createdAt: serverTimestamp(),
+            deleted: false,
+            createdAt: serverTimestamp()
         })
 
         setTask('')

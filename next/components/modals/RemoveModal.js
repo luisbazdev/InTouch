@@ -7,16 +7,15 @@ import Task from '../layout/Task';
 
 import { AiOutlineClose } from "react-icons/ai";
 
-export default function CheckModal({group, selected, setSelected, close}){
+export default function RemoveModal({group, selected, setSelected, close}){
 
     function finish(){
         for (let i = 0; i < selected.length; i++) {
             var taskRef = doc(db, 'groups', `${group}/tasks/${selected[i].id}`);
 
             updateDoc(taskRef, {
-                completed: true,
-                removed: true,
-                finishedAt: serverTimestamp()
+                deleted: true,
+                deletedAt: serverTimestamp()
             })
         }
 
@@ -31,7 +30,7 @@ export default function CheckModal({group, selected, setSelected, close}){
                     <div className={styles.close} onClick={() => close(false)} >
                         <AiOutlineClose className={styles.icon}/>
                     </div>
-                    Are you sure you want to check the following tasks?
+                    Are you sure you want to remove the following tasks?
                 </div>
 
                 <div className={styles.tasks}>

@@ -45,7 +45,7 @@ export default function Checked({group, styles}){
         <div className={styles.content}>
             <div className={styles.checked}>
             {tasks?.map(task => {
-                return <Task key={task.id} task={task}/>
+                return <Task key={task.id} task={task} disabled={true}/>
             })}
             </div>
         </div>

@@ -18,11 +18,11 @@ export default function Tasks({group, styles}){
     const checkRef = useRef(null)
     const removeRef = useRef(null)
 
-    const { selected, setSelected, setSeeCheckModal } = React.useContext(GroupContext)
+    const { selected, setSelected, setSeeCheckModal, setSeeRemoveModal } = React.useContext(GroupContext)
 
     useEffect(() => {
         if(group != null){
-            const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', false), orderBy('createdAt', 'desc')), 
+            const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', false), where('deleted', '==', false), orderBy('createdAt', 'desc')), 
             (snapshot) => {
                 setTasks(snapshot.docs)
                 setLoading(false)
@@ -60,7 +60,7 @@ export default function Tasks({group, styles}){
                         hidden
                         ref={checkRef}
                         disabled={selected.length <= 0}
-                        onClick={() => setSeeCheckModal(true)}>Check</button>
+                        onClick={() => setSeeCheckModal(true)}></button>
                     </div>
                     <div className={`${styles.button_check} ${selected.length <= 0 ? styles.disabled : ''}`}>
                         <FaTrash className={styles.button_check_icon} onClick={() => removeRef.current.click()}/>
@@ -68,7 +68,7 @@ export default function Tasks({group, styles}){
                         hidden
                         ref={removeRef}
                         disabled={selected.length <= 0}
-                        onClick={() => setSeeCheckModal(true)}>Check</button>
+                        onClick={() => setSeeRemoveModal(true)}></button>
                     </div>
                 </div>
                 {tasks?.map(task => {
