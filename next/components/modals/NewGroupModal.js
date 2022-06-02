@@ -38,7 +38,7 @@ export default function NewGroupModal({session, close}){
         }
     }
 
-    function createGroup(name, description, owner){
+    function createGroup(name, description, overview, owner){
         // Upload the picture (in the 'picture' variable)
         // to the storage, after that, insert the picture URL
         // in the document below
@@ -98,7 +98,7 @@ export default function NewGroupModal({session, close}){
                 <div className={styles.container}>
                     <input type='file' ref={filePicker} hidden onChange={addPicture}/>
                     <div className={styles.add} onClick={() => filePicker.current.click()}>
-                        <short>Click to select group image</short>
+                        <strong>Click to select group image</strong>
                         { picture ? (<img className={styles.preview} src={picture}/>) : (<div className={styles.empty_preview}></div>) }
                     </div>
                 </div>

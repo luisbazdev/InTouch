@@ -12,7 +12,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { GroupContext } from "../../contexts/GroupContext";
 
 export default function Sidebar({session}){
-    const { setSeeCreateGroup } = React.useContext(GroupContext)
+    const { setGroup, setSeeCreateGroup } = React.useContext(GroupContext)
     const [ groups, setGroups ] = useState([])
 
     // Retrieve the groups the user belongs
@@ -42,15 +42,12 @@ export default function Sidebar({session}){
                 {groups?.map((group) => {
                     return (
                     <div className={styles.group} key={group.id}>
-
-                        <Link href={`/g/${group.id}`}><img src={group?.data()?.picture}/></Link>
+                        <Link href={`/g/${group.id}`}>
+                            <img onClick={() => setGroup(group.id)} src={group?.data()?.picture}/>
+                        </Link>
                     </div>)
                 })}
             </div>
-
-            {/* <div className={styles.search}>
-                <AiOutlineSearch className={styles.button}/>
-            </div> */}
         </div>
     )
 }

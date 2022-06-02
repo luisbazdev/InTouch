@@ -15,7 +15,7 @@ import NewGroupModal from "./modals/NewGroupModal";
 import CheckModal from "./modals/CheckModal";
 import RemoveModal from "./modals/RemoveModal";
 
-export default function Main({group}){
+export default function Main(){
 
     const { session, loading } = React.useContext(AuthContext)
 
@@ -30,11 +30,9 @@ export default function Main({group}){
             seeNewBranchModal,
             setSeeNewBranchModal,
             seeRemoveModal,
-            setSeeRemoveModal } = React.useContext(GroupContext)
+            setSeeRemoveModal,
+            group } = React.useContext(GroupContext)
 
-    {/*Users can see groups where they're
-    not in by joining its url and getting
-    redirected 1 second after...*/}
     if(loading){
         return (
             <div>Loading . . .</div>
@@ -50,15 +48,11 @@ export default function Main({group}){
             { seeRemoveModal && <RemoveModal session={session} group={group} close={setSeeRemoveModal} selected={selected} setSelected={setSelected}/>}
 
             <Sidebar session={session}/>
-            <Header group={group}/>
+            
+            {group != null && <Header/>}
             <div className={styles.main}>
                 {group != null && <Editor group={group} session={session}/>}
             </div>
         </div>
     )
 }
-
-                {/* Editor is showing even right after logging in when 
-                there's no selected group, there are 2 options:
-                either to not render 'Editor' component yet,
-                or to set a default current group. */}

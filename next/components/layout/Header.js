@@ -1,30 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react"
 
-import { collection, onSnapshot, query, where, documentId} from "firebase/firestore";
-import { db } from '../../firebase';
+import { GroupContext } from "../../contexts/GroupContext"
 
 import styles from './Header.module.css'
 
-export default function Header({group}){
-    const [data, setData] = useState([])
+export default function Header(){
 
-    useEffect(() => {
-        if(group != null){
-            const unsubscribe = onSnapshot(query((collection(db, 'groups')), where(documentId(), '==', group)), 
-            (snapshot) => {
-              setData(snapshot.docs)
-            })
-
-        return () => {
-            unsubscribe()
-        }
-    }
-    }, [group])
+    const { currentGroupData } = React.useContext(GroupContext)
     
     return (
         <div className={styles.header}>
-            <h3>{data[0]?.data().name}</h3>
-            <small>{data[0]?.data().description}</small>
+            <h3>{currentGroupData[0]?.data().name}</h3>
+            <small>{currentGroupData[0]?.data().description}</small>
         </div>
     )
 }

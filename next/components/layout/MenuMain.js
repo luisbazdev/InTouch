@@ -1,12 +1,18 @@
+import React from "react"
+
 import styles from './MenuMain.module.css'
 
-import { AiOutlineClose, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai'
+
+import { GroupContext } from "../../contexts/GroupContext"
 
 export default function MenuMain({setSeeNewTaskModal, setSeeNewBranchModal}){
+
+    const { currentGroupData } = React.useContext(GroupContext)
+
     return (
         <div className={styles.info}>
             <div className={styles.options}>
-
                 <div className={styles.button}>
                     <AiOutlinePlus/>
                     <button onClick={() => setSeeNewTaskModal(true)}>New task</button>
@@ -17,8 +23,7 @@ export default function MenuMain({setSeeNewTaskModal, setSeeNewBranchModal}){
                 </div>
             </div>
             <p className={styles.overview}>
-            This is our InTouch group to maintain all of our tasks synced. Please don't create new tasks
-            before checking if someone already finished them.
+                {currentGroupData[0]?.data().overview}
             </p>
         </div>
     )
