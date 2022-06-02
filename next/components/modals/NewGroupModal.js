@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import styles from './NewGroupModal.module.css';
 
@@ -14,10 +14,13 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 export default function NewGroupModal({session, close}){
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
 
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [overview, setOverview] = useState('')
     const [picture, setPicture] = useState(null)
+
+    const filePicker = useRef(null)
 
     const router = useRouter()
 
@@ -47,6 +50,7 @@ export default function NewGroupModal({session, close}){
                 addDoc(collection(db, 'groups'), {
                     name,
                     description,
+                    overview,
                     owner,
                     picture: URL,
                     members: [session.uid],
@@ -73,22 +77,37 @@ export default function NewGroupModal({session, close}){
     return (
         <div className={styles.bg}>
             <div className={styles.modal}>
-                <div className={styles.close} onClick={() => close(false)} >
-                    <AiOutlineClose className={styles.icon}/>
+                <div className={styles.header} onClick={() => close(false)}>
+                    <h3>Create a new group</h3>
+                    <div className={styles.close}>
+                        <AiOutlineClose className={styles.icon}/>
+                    </div>
                 </div>
-                <div className={styles.option}>
-                    <h3>Group Name</h3>
+                <div className={styles.container}>
+                    <strong>Choose a name for your group</strong>
                     <input type='text' onChange={(e) => setName(e.target.value)}/>
                 </div>
-                <div className={styles.option}>
-                    <h3>Group Description</h3>
-                    <textarea rows='12' onChange={(e) => setDescription(e.target.value)}/>
+                <div className={styles.container}>
+                    <strong>Give a short description about your group</strong>
+                    <input type='text' onChange={(e) => setDescription(e.target.value)}/>
                 </div>
-                <div className={styles.option}>
-                    <h3>Group Image</h3>
-                    <input type='file' onChange={addPicture}/>
+                <div className={styles.container}>
+                    <strong>General overview/rules</strong>
+                    <textarea onChange={(e) => setOverview(e.target.value)}/>
                 </div>
-                <button className={styles.button} onClick={() => createGroup(name, description, session.uid)}>Create Group</button>
+                <div className={styles.container}>
+                    <input type='file' ref={filePicker} hidden onChange={addPicture}/>
+                    <div className={styles.add} onClick={() => filePicker.current.click()}>
+                        <short>Click to select group image</short>
+                        { picture ? (<img className={styles.preview} src={picture}/>) : (<div className={styles.empty_preview}></div>) }
+                    </div>
+                </div>
+                <div className={styles.submit}>
+                    <button className={styles.button} 
+                    disabled={(!name || !description || !overview || !picture)} 
+                    onClick={() => createGroup(name, description, overview, session.uid)}
+                    >Create Group</button>
+                </div>
             </div>
         </div>
     )

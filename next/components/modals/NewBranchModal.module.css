@@ -11,7 +11,7 @@
 
 .modal{
     overflow-y: auto;
-    color: black;
+    color: #3f3d47;
     z-index: 200;
     display: flex;
     flex-direction: column;

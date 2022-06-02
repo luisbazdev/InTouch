@@ -7,7 +7,7 @@ import { db } from '../../firebase';
 
 import Link from "next/link";
 
-import { AiOutlineSearch, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 import { GroupContext } from "../../contexts/GroupContext";
 

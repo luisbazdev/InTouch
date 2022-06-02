@@ -10,65 +10,117 @@
 }
 
 .modal{
+    overflow-y: auto;
+    color: #3f3d47;
     z-index: 200;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    padding: 15px;
+    padding: 20px;
     border-radius: 2%;
-    background-color: #ececec;
+    background-color: #ffffff;
     width: 500px;
     height: 500px;
 }
 
-.modal h3{
-    padding: 0;
-    margin: 0;
-}
-
-.modal textarea, .modal input{
-    color: white;
-    border: 1px solid rgb(104, 104, 104);
-    background-color: #333333;
-    padding: 8px 12px;
-}
-
-.modal textarea:focus, .modal input:focus{
+.modal input:focus, .modal textarea:focus{
     outline: none;
 }
 
-.close{
-    margin-left: auto;
-    width: 35px;
-    height: 35px;
+.modal input, .modal textarea{
+    font-family: 'Ubuntu', sans-serif;
+    padding: 10px 10px;
+    border: 2px solid #5add5a;
+    border-radius: 10px;
+}
+
+.modal textarea{
+    height: 135px;
+}
+
+.header{
+    position: relative;
     display: flex;
-    background-color: #333333;
-    border-radius: 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+.close{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    right: 0;
+    display: flex;
+    color: #ffffff;
+    background-color: #5add5a;
+    border-radius: 100%;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 }
 
 .icon{
-    width: 20px;
-    height: 20px;
+    color: #ffffff;
+    width: 19px;
+    height: 19px;
 }
 
-.option{
+.container{
     display: flex;
     flex-direction: column;
-    row-gap: 6px;
+    row-gap: 5px;
 }
 
-.button{
-    padding: 5px 10px;
-    background-color: #333333;
+.color{
     display: flex;
-    justify-content: center;
-    column-gap: 3px;
-    border-radius: 3px;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
 }
 
-.button button{
-    font-weight: 800;
+.submit{
+    padding: 10px 0;
+    border-radius: 5px;
+    background-color: #5add5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit button{
+    font-size: medium;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.add{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: min-content;
+    padding: 10px 0;
+    /* background-color: #e7e7e7; */
+    border: 1px dashed #f1f1f1;
+    border-radius: 5px;
+    color: #777386;
+    font-weight: 900;
+    font-size: small;
+}
+
+.preview{
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.empty_preview{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: #777386;
 }

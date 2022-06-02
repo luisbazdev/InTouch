@@ -126,7 +126,10 @@ export default function NewTaskModal({session, group, close}){
                     <textarea onChange={(e) => setTaskNote(e.target.value)}/>
                 </div>
                 <div className={styles.submit}>
-                    <button onClick={() => submitTask(task, taskNote, false, session.uid, taskBranch, taskColor)}>Create</button>
+                    <button 
+                    disabled={(!task || !taskBranch || !taskColor)}
+                    onClick={() => submitTask(task, taskNote, false, session.uid, taskBranch, taskColor)}
+                    >Create</button>
                 </div>
             </div>
         </div>

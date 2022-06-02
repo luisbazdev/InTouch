@@ -47,7 +47,10 @@ export default function NewBranchModal({session, group, close}){
                     <SwatchesPicker width='100%' onChange={(color) => setBranchColor(color.hex)}/>
                 </div>
                 <div className={styles.submit}>
-                    <button onClick={() => submitBranch(branchName, branchColor, session.uid)}>Create Branch</button>
+                    <button 
+                    disabled={(!branchName || !branchColor)}
+                    onClick={() => submitBranch(branchName, branchColor, session.uid)}
+                    >Create</button>
                 </div>
             </div>  
         </div>
