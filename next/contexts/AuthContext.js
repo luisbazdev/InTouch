@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 const AuthContext = React.createContext(null)
 
 const AuthProvider = ({children}) => {
-    const [session, setSession] = useState(null);
+    const [session, setSession] = useState(null)
     const [loading, setLoading] = useState(true)
 
     const router = useRouter()
@@ -30,7 +30,6 @@ const AuthProvider = ({children}) => {
                 }
                 else if(session.credentials != null && router.pathname == '/g/[groupId]'){
                     console.log('case 2')
-                    setLoading(true)
                     setSession(session.credentials)
                     router.push('/')
                 }
@@ -45,15 +44,12 @@ const AuthProvider = ({children}) => {
                 }
                 else{
                     console.log('case 5')
-                    setSession(session.credentials)
                     router.push('/login')
                 }
             })
-            .finally(() => setLoading(false))
         }, [])
     }
     
-
     function signIn(){
         signInWithPopup(auth, provider)
         .then((result) => {
@@ -108,6 +104,7 @@ const AuthProvider = ({children}) => {
         signIn,
         logOut,
         loading,
+        setLoading
     }
 
     return (

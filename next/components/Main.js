@@ -15,6 +15,8 @@ import NewGroupModal from "./modals/NewGroupModal";
 import CheckModal from "./modals/CheckModal";
 import RemoveModal from "./modals/RemoveModal";
 
+import ReactLoading from 'react-loading';
+
 export default function Main(){
 
     const { session, loading } = React.useContext(AuthContext)
@@ -35,7 +37,9 @@ export default function Main(){
 
     if(loading){
         return (
-            <div>Loading . . .</div>
+            <div className={styles.loading}>
+                <ReactLoading type='spin' color='#33be33'/>
+            </div>
         )
     }
 

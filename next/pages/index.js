@@ -1,7 +1,17 @@
+import React, { useEffect } from 'react';
+
 import Head from 'next/head'
 import Main from '../components/Main'
 
+import { AuthContext } from "../contexts/AuthContext";
+
 export default function Home() {
+  const { setLoading } = React.useContext(AuthContext)
+
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
   return (
     <div>
       <Head>
