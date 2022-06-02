@@ -3,17 +3,9 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where, documentId} from "firebase/firestore";
 import { db } from '../firebase';
 
-import { useRouter } from "next/router";
-
 const GroupContext = React.createContext(null)
 
 const GroupProvider = ({children}) => {
-
-    const router = useRouter()
-
-    useEffect(() => {
-        console.log(router.query.groupId)
-    }, [router.query])
 
     const [group, setGroup] = useState(null)
     const [currentGroupData, setCurrentGroupData] = useState([])
