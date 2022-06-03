@@ -10,6 +10,11 @@ const GroupProvider = ({children}) => {
     const [group, setGroup] = useState(null)
     const [currentGroupData, setCurrentGroupData] = useState([])
 
+    const [seeHome, setSeeHome] = useState(true)
+    const [seeChecked, setSeeChecked] = useState(false)
+    const [seeBranches, setSeeBranches] = useState(false)
+    const [seeRemoved, setSeeRemoved] = useState(false)
+
     const [selected, setSelected] = useState([])
 
     const [seeCreateGroup, setSeeCreateGroup] = useState(false)
@@ -17,7 +22,7 @@ const GroupProvider = ({children}) => {
     const [seeNewTaskModal, setSeeNewTaskModal] = useState(false)
     const [seeNewBranchModal, setSeeNewBranchModal] = useState(false)
     const [seeRemoveModal, setSeeRemoveModal] = useState(false)
-
+    
     useEffect(() => {
         if(group != null){
             const unsubscribe = onSnapshot(query((collection(db, 'groups')), where(documentId(), '==', group)), 
@@ -32,22 +37,18 @@ const GroupProvider = ({children}) => {
     }, [group])
 
     const data = {
-        selected,
-        setSelected,
-        seeCreateGroup,
-        setSeeCreateGroup,
-        seeCheckModal,
-        setSeeCheckModal,
-        seeNewTaskModal,
-        setSeeNewTaskModal,
-        seeNewBranchModal,
-        setSeeNewBranchModal,
-        seeRemoveModal,
-        setSeeRemoveModal,
-        group,
-        setGroup,
-        currentGroupData,
-        setCurrentGroupData
+        selected, setSelected,
+        seeCreateGroup, setSeeCreateGroup,
+        seeCheckModal, setSeeCheckModal,
+        seeNewTaskModal, setSeeNewTaskModal,
+        seeNewBranchModal, setSeeNewBranchModal,
+        seeRemoveModal, setSeeRemoveModal,
+        group, setGroup,
+        currentGroupData, setCurrentGroupData,
+        seeHome, setSeeHome,
+        seeChecked, setSeeChecked,
+        seeBranches, setSeeBranches,
+        seeRemoved, setSeeRemoved
     }
 
     return (

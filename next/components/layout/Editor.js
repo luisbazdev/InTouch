@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import styles from './Editor.module.css'
 
@@ -11,11 +11,15 @@ import Branches from "./Branches";
 
 import Menu from "./Menu";
 
+import { GroupContext } from "../../contexts/GroupContext";
+
 export default function Editor({group, session}){
-    const [seeHome, setSeeHome] = useState(true)
-    const [seeChecked, setSeeChecked] = useState(false)
-    const [seeBranches, setSeeBranches] = useState(false)
-    const [seeRemoved, setSeeRemoved] = useState(false)
+    const { 
+        seeHome, setSeeHome,
+        seeChecked, setSeeChecked,
+        seeBranches, setSeeBranches,
+        seeRemoved, setSeeRemoved
+    } = React.useContext(GroupContext)
 
     return (
         <div className={styles.editor}>
