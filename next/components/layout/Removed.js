@@ -9,6 +9,8 @@ import ReactLoading from 'react-loading';
 
 import Masonry from 'react-masonry-css'
 
+import Empty from './Empty';
+
 export default function Removed({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -35,13 +37,7 @@ export default function Removed({group, styles}){
         )
 
     if(tasks?.length <= 0)
-        return (
-            <div className={styles.content}>
-                <div className={styles.empty}>
-                    <p>There are no removed tasks!</p>
-                </div>
-            </div>
-        )
+        return <Empty/>
 
     return (
         <div className={styles.content}>

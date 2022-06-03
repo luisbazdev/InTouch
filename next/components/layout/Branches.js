@@ -11,33 +11,24 @@ export default function Branches({group, styles}){
     const [branches, setBranches] = useState([])
     const [loading, setLoading] = useState(true)
 
-        useEffect(() => {
-            if(group != null){
-                const unsubscribe = onSnapshot(collection(db, `groups/${group}/branches`), 
-                (snapshot) => {
-                  setBranches(snapshot.docs)
-                  setLoading(false)
-                })
+    useEffect(() => {
+        if(group != null){
+            const unsubscribe = onSnapshot(collection(db, `groups/${group}/branches`), 
+            (snapshot) => {
+              setBranches(snapshot.docs)
+              setLoading(false)
+            })
 
-                return () => {
-                    unsubscribe()
-                }
+            return () => {
+                unsubscribe()
             }
+        }
     }, [group])
     
     if(loading)
         return (
             <div className={styles.loading}>
                 <ReactLoading type='spin' color='#33be33'/>
-            </div>
-        )
-
-    if(branches?.length <= 0)
-        return (
-            <div className={styles.content}>
-                <div className={styles.empty}>
-                    <p>There are no branches yet!</p>
-                </div>
             </div>
         )
 

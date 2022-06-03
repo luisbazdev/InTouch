@@ -9,7 +9,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #ececec;
-  color: white;
+  color: #3f3d47;
 }
 
 body > div:first-child, div#__next, div#__next > div {

@@ -12,6 +12,7 @@ import {FaCheck, FaTrash} from 'react-icons/fa'
 import ReactLoading from 'react-loading';
 
 import Masonry from 'react-masonry-css'
+import Empty from './Empty';
 
 export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
@@ -20,7 +21,7 @@ export default function Tasks({group, styles}){
     const checkRef = useRef(null)
     const removeRef = useRef(null)
 
-    const { selected, setSelected, setSeeCheckModal, setSeeRemoveModal } = React.useContext(GroupContext)
+    const { selected, setSelected, setSeeCheckModal, setSeeRemoveModal, setSeeNewTaskModal } = React.useContext(GroupContext)
 
     useEffect(() => {
         if(group != null){
@@ -44,13 +45,7 @@ export default function Tasks({group, styles}){
         )
 
     if(tasks?.length <= 0)
-        return (
-            <div className={styles.content}>
-                <div className={styles.empty}>
-                    <p>There are no tasks to complete yet!</p>
-                </div>
-            </div>
-        )
+        return <Empty section='tasks' setSeeNewTaskModal={setSeeNewTaskModal}/>
 
     return (
         <div className={styles.content}>

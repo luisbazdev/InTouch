@@ -8,6 +8,7 @@ import Task from './Task'
 import ReactLoading from 'react-loading';
 
 import Masonry from 'react-masonry-css'
+import Empty from './Empty';
 
 export default function Checked({group, styles}){
     const [tasks, setTasks] = useState(null)
@@ -35,13 +36,7 @@ export default function Checked({group, styles}){
         )
 
     if(tasks?.length <= 0)
-        return (
-            <div className={styles.content}>
-                <div className={styles.empty}>
-                    <p>There are no completed tasks yet!</p>
-                </div>
-            </div>
-        )
+        return <Empty/>
 
     return (
         <div className={styles.content}>
