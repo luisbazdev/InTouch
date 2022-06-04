@@ -14,6 +14,7 @@ import Menu from "./Menu";
 import { GroupContext } from "../../contexts/GroupContext";
 
 export default function Editor({group, session}){
+    
     const { 
         seeHome, setSeeHome,
         seeChecked, setSeeChecked,

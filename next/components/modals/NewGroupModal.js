@@ -13,12 +13,16 @@ import { AiOutlineClose } from "react-icons/ai";
 
 import { useRouter } from "next/router";
 
+import { GroupContext } from "../../contexts/GroupContext";
+
 export default function NewGroupModal({session, close}){
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [overview, setOverview] = useState('')
     const [picture, setPicture] = useState(null)
+
+    const { setGroup } = React.useContext(GroupContext)
 
     const filePicker = useRef(null)
 
@@ -66,6 +70,7 @@ export default function NewGroupModal({session, close}){
                         createdAt: serverTimestamp()
                     })
 
+                    setGroup(group.id)
                     router.push(`/g/${group.id}`)
                 })
             })
