@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 
 import styles from './Sidebar.module.css'
 
-import { onSnapshot, collection, query, where } from 'firebase/firestore';
+import { onSnapshot, collection, query, where, documentId, orderBy } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 import Link from "next/link";
@@ -19,22 +19,41 @@ export default function Sidebar({session}){
             setSeeBranches,
             setSeeRemoved } = React.useContext(GroupContext)
 
+    const [ userGroups, setUserGroups ] = useState([])
     const [ groups, setGroups ] = useState([])
 
-    // Retrieve the groups the user belongs
-    // to in order, because right now it retrieves
-    // the groups in alphabetical order
     useEffect(() => {
         if(session != null){
-            const unsubscribe = onSnapshot(query((collection(db, "groups")), where('members', 'array-contains-any', [session.uid])), 
+            const unsubscribe = onSnapshot(query(collection(db, `users/${session.uid}/groups`), orderBy('joinedAt', 'desc')), 
             (snapshot) => {
-              setGroups(snapshot.docs)
+              let _userGroups = []
+
+              snapshot.docs.forEach(g => {
+                  _userGroups.push(g.data().groupId)
+              })
+
+              setUserGroups(_userGroups)
             })
+
             return () => {
                 unsubscribe()
             }
         }
     }, [session])
+
+    useEffect(() => {
+        if(session != null && userGroups.length > 0){
+            const unsubscribe = onSnapshot(query((collection(db, "groups")), where(documentId(), 'in', userGroups),
+            ), 
+            (snapshot) => {
+              setGroups(snapshot.docs)
+            })
+
+            return () => {
+                unsubscribe()
+            }
+        }
+    }, [session, userGroups])
     
     return (
         <div className={styles.sidebar}>
@@ -42,7 +61,7 @@ export default function Sidebar({session}){
                 <AiOutlinePlus className={styles.icon}/>
             </div>
             <div className={styles.groups}>
-                {groups?.map((g) => {
+                {groups?.sort((a, b) => userGroups.indexOf(a.id) - userGroups.indexOf(b.id)).map((g) => {
                     return (
                     <div className={styles.group} key={g.id}>
                         <Link href={`/g/${g.id}`}>

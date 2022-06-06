@@ -6,7 +6,7 @@ import { db, storage } from '../../firebase';
 
 import { nanoid } from 'nanoid'
 
-import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, setDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -28,9 +28,6 @@ export default function NewGroupModal({session, close}){
 
     const router = useRouter()
 
-    // Let users upload their group pictures
-    // and set it in the 'picture' field down
-    // in the createGroup function
     function addPicture(e){
     
         const reader = new FileReader()
@@ -43,12 +40,9 @@ export default function NewGroupModal({session, close}){
     }
 
     function createGroup(name, description, overview, owner){
-        // Upload the picture (in the 'picture' variable)
-        // to the storage, after that, insert the picture URL
-        // in the document below
         const imgRef = ref(storage, `groups/${nanoid()}`)
 
-        uploadString(imgRef, picture, 'data_url').then((snapshot) =>{
+        uploadString(imgRef, picture, 'data_url').then((snapshot) => {
             getDownloadURL(imgRef)
             .then((URL) => {
                 addDoc(collection(db, 'groups'), {
@@ -60,14 +54,22 @@ export default function NewGroupModal({session, close}){
                     members: [session.uid],
                     createdAt: serverTimestamp()
                 }).then(group => {
-                    let collRef = collection(db, `${group.path}/branches`)
-                    let docRef = doc(collRef)
+                    const collRef = collection(db, `${group.path}/branches`)
+                    const docRef = doc(collRef)
 
                     setDoc(docRef, {
                         branch: 'none',
                         color: '#969696',
                         owner: null,
                         createdAt: serverTimestamp()
+                    })
+
+                    const collRef2 = collection(db, `users/${session.uid}/groups`)
+                    const userRef = doc(collRef2);
+
+                    setDoc(userRef, {
+                        groupId: group.id,
+                        joinedAt: serverTimestamp()
                     })
 
                     setGroup(group.id)

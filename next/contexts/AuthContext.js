@@ -5,6 +5,9 @@ import { auth, provider } from '../firebase';
 
 import { useRouter } from "next/router";
 
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from '../firebase'
+
 const AuthContext = React.createContext(null)
 
 const AuthProvider = ({children}) => {
@@ -36,23 +39,36 @@ const AuthProvider = ({children}) => {
 
     function signIn(){
         signInWithPopup(auth, provider)
-        .then((result) => {
+        .then(async (result) => {
           const username = result.user.displayName;
           const pictureURL = result.user.photoURL;
           const uid = result.user.uid;
 
-          const s = { username, pictureURL, uid}
-          setSession(s)
+          const docRef = doc(db, "users", uid);
+          const docSnap = await getDoc(docRef);
 
+          if(!docSnap.exists()){
+            setDoc(doc(db, "users", uid), {
+                name: username,
+                picture: pictureURL,
+                uid,
+            });
+          }
+
+          const s = { username, pictureURL, uid}
+
+          setSession(s)
           router.push('/')
+
         }).catch((error) => {
           // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
+        //   const errorCode = error.code;
+        //   const errorMessage = error.message;
           // The email of the user's account used.
-          const email = error.customData.email;
+        //   const email = error.customData.email;
             // The AuthCredential type that was used.
-          const credential = GoogleAuthProvider.credentialFromError(error);
+        //   const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(error)
         });
     }
 

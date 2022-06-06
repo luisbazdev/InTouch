@@ -19,7 +19,7 @@ import ReactLoading from 'react-loading';
 
 export default function Main(){
 
-    const { session, loading } = React.useContext(AuthContext)
+    const { session, loading, logOut } = React.useContext(AuthContext)
 
     const { selected,
             setSelected,
@@ -57,6 +57,7 @@ export default function Main(){
             <div className={styles.main}>
                 {group != null && <Editor group={group} session={session}/>}
             </div>
+            {/* <button onClick={logOut}>log out</button> */}
         </div>
     )
 }
