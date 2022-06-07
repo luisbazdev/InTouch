@@ -23,8 +23,8 @@ const AuthProvider = ({children}) => {
                 const pictureURL = user.photoURL;
                 const uid = user.uid;
       
-                const s = { username, pictureURL, uid}
-                setSession(s)
+                const _session = { username, pictureURL, uid}
+                setSession(_session)
 
                 if(router.pathname == '/g/[groupId]' || router.pathname == '/login'){
                     router.push('/')
@@ -55,19 +55,12 @@ const AuthProvider = ({children}) => {
             });
           }
 
-          const s = { username, pictureURL, uid}
+          const _session = { username, pictureURL, uid}
 
-          setSession(s)
+          setSession(_session)
           router.push('/')
 
         }).catch((error) => {
-          // Handle Errors here.
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-          // The email of the user's account used.
-        //   const email = error.customData.email;
-            // The AuthCredential type that was used.
-        //   const credential = GoogleAuthProvider.credentialFromError(error);
             console.log(error)
         });
     }
@@ -77,7 +70,7 @@ const AuthProvider = ({children}) => {
             setSession(null)
             router.push('/login')
           }).catch((error) => {
-            // An error happened.
+            console.log(error)
           });
     }
 
