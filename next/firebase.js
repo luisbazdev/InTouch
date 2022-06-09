@@ -6,17 +6,15 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASEURL,
-  projectId: process.env.FIREBASE_PROJECTID,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.FIREBASE_APPID,
-  measurementId: process.env.FIREBASE_MEASUREMENTID
+  apiKey: "AIzaSyCJwuRglZiu1R6WCcdUnn-JCjj6sDHrh_M",
+  authDomain: "intouch-test-998d2.firebaseapp.com",
+  projectId: "intouch-test-998d2",
+  storageBucket: "intouch-test-998d2.appspot.com",
+  messagingSenderId: "862365213148",
+  appId: "1:862365213148:web:110d1aeb7a133e9ac9af19"
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const storage = getStorage(app);
