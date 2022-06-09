@@ -21,7 +21,7 @@ import ReactLoading from 'react-loading';
 
 export default function Main(){
 
-    const { session, loading, logOut } = React.useContext(AuthContext)
+    const { session, loading } = React.useContext(AuthContext)
 
     const { selected,
             setSelected,
