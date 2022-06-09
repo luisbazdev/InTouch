@@ -12,14 +12,15 @@ export default function NewBranchModal({session, group, close}){
     const [branchName, setBranchName] = useState('')
     const [branchColor, setBranchColor] = useState('')
 
-    function submitBranch(branch, color, owner){
-        let collRef = collection(db, `groups/${group}/branches`)
+    function submitBranch(branch, color, ownerId, ownerName){
+        let collRef = collection(db, `groups/${group.id}/branches`)
         let docRef = doc(collRef)
 
         setDoc(docRef, {
             branch,
             color,
-            owner,
+            ownerId,
+            ownerName,
             createdAt: serverTimestamp()
         })
 
@@ -49,7 +50,7 @@ export default function NewBranchModal({session, group, close}){
                 <div className={styles.submit}>
                     <button 
                     disabled={(!branchName || !branchColor)}
-                    onClick={() => submitBranch(branchName, branchColor, session.uid)}
+                    onClick={() => submitBranch(branchName, branchColor, session.uid, session.username)}
                     >Create</button>
                 </div>
             </div>  

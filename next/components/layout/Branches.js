@@ -13,7 +13,7 @@ export default function Branches({group, styles}){
 
     useEffect(() => {
         if(group != null){
-            const unsubscribe = onSnapshot(collection(db, `groups/${group}/branches`), 
+            const unsubscribe = onSnapshot(collection(db, `groups/${group.id}/branches`), 
             (snapshot) => {
               setBranches(snapshot.docs)
               setLoading(false)

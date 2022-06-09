@@ -14,18 +14,18 @@ export default function Checked({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
 
-        useEffect(() => {
-            if(group != null){
-                const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', true), orderBy('finishedAt', 'desc')), 
-                (snapshot) => {
-                  setTasks(snapshot.docs)
-                  setLoading(false)
-                })
+    useEffect(() => {
+        if(group != null){
+            const unsubscribe = onSnapshot(query(collection(db, `groups/${group.id}/tasks`), where('completed', '==', true), orderBy('finishedAt', 'desc')), 
+            (snapshot) => {
+              setTasks(snapshot.docs)
+              setLoading(false)
+            })
 
-                return () => {
-                    unsubscribe()
-                }
+            return () => {
+                unsubscribe()
             }
+        }
     }, [group])
     
     if(loading)

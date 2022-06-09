@@ -25,7 +25,7 @@ export default function Tasks({group, styles}){
 
     useEffect(() => {
         if(group != null){
-            const unsubscribe = onSnapshot(query(collection(db, `groups/${group}/tasks`), where('completed', '==', false), where('deleted', '==', false), orderBy('createdAt', 'desc')), 
+            const unsubscribe = onSnapshot(query(collection(db, `groups/${group.id}/tasks`), where('completed', '==', false), where('deleted', '==', false), orderBy('createdAt', 'desc')), 
             (snapshot) => {
                 setTasks(snapshot.docs)
                 setLoading(false)

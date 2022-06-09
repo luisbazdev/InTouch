@@ -5,7 +5,7 @@ import { auth, provider } from '../firebase';
 
 import { useRouter } from "next/router";
 
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase'
 
 const AuthContext = React.createContext(null)
@@ -14,17 +14,39 @@ const AuthProvider = ({children}) => {
     const [session, setSession] = useState(null)
     const [loading, setLoading] = useState(true)
 
+    const [userGroups, setUserGroups] = useState([])
+
     const router = useRouter()
+
+      useEffect(() => {
+        if(session != null){
+            const unsubscribe = onSnapshot(query(collection(db, `users/${session.uid}/groups`), orderBy('joinedAt', 'desc')), 
+            (snapshot) => {
+              let _userGroups = []
+
+              snapshot.docs.forEach(g => {
+                  _userGroups.push(g.data().groupId)
+              })
+
+              setUserGroups(_userGroups)
+            })
+
+            return () => {
+                unsubscribe()
+            }
+        }
+    }, [session])
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if(user){
                 const username = user.displayName;
+                const email = user.email;
                 const pictureURL = user.photoURL;
                 const uid = user.uid;
       
-                const s = { username, pictureURL, uid}
-                setSession(s)
+                const _session = { username, email, pictureURL, uid}
+                setSession(_session)
 
                 if(router.pathname == '/g/[groupId]' || router.pathname == '/login'){
                     router.push('/')
@@ -41,6 +63,7 @@ const AuthProvider = ({children}) => {
         signInWithPopup(auth, provider)
         .then(async (result) => {
           const username = result.user.displayName;
+          const email = result.user.email;
           const pictureURL = result.user.photoURL;
           const uid = result.user.uid;
 
@@ -55,19 +78,12 @@ const AuthProvider = ({children}) => {
             });
           }
 
-          const s = { username, pictureURL, uid}
+          const _session = { username, email, pictureURL, uid}
 
-          setSession(s)
+          setSession(_session)
           router.push('/')
 
         }).catch((error) => {
-          // Handle Errors here.
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-          // The email of the user's account used.
-        //   const email = error.customData.email;
-            // The AuthCredential type that was used.
-        //   const credential = GoogleAuthProvider.credentialFromError(error);
             console.log(error)
         });
     }
@@ -77,7 +93,7 @@ const AuthProvider = ({children}) => {
             setSession(null)
             router.push('/login')
           }).catch((error) => {
-            // An error happened.
+            console.log(error)
           });
     }
 
@@ -87,6 +103,7 @@ const AuthProvider = ({children}) => {
         setLoading,
         signIn,
         logOut,
+        userGroups
     }
 
     return (

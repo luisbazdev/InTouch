@@ -1,0 +1,127 @@
+.welcome h3{
+    font-weight: lighter;
+}
+
+.welcome{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 125px 1fr;
+    width: 100%;
+    height: 100%;
+}
+
+.profile, .main{
+    box-shadow: 0px 5px 11px 1px rgba(198, 198, 198, 0.69);
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 8px 15px;
+}
+
+.profile{
+    display: grid;
+    grid-template-columns: 400px 1fr;
+}
+
+.user{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #d6d6d6;
+    row-gap: 10px;
+}
+
+.user img{
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.info{
+    padding: 10px;
+}
+
+.main{
+    display: grid;
+    overflow-y: auto;
+    grid-template-columns: 600px 1fr;
+}
+
+.activity{
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.thing{
+    overflow-y: auto;
+    padding: 20px 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.invitations{
+    border-left: 1px solid #d6d6d6;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.thing2{
+    overflow-y: auto;
+    padding: 20px 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    background-color: rgb(247, 247, 247);
+    padding: 15px 25px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.options{
+    padding: 10px;
+    display: grid;
+    grid-template-rows: fit-content fit-content;
+}
+
+.option{
+    cursor: pointer;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #5add5a;
+    border-radius: 2px;
+    width: fit-content;
+    padding: 5px;
+    column-gap: 5px;
+}
+
+.option_icon{
+    font-size: 20px;
+}
+
+.auth{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.auth_icon{
+    font-size: 20px;
+}
+
+.auth_button{
+    color: rgb(212, 40, 40);
+    cursor: pointer;
+    column-gap: 4px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -2,44 +2,26 @@ import React, { useState, useEffect } from "react"
 
 import styles from './Sidebar.module.css'
 
-import { onSnapshot, collection, query, where, documentId, orderBy } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { onSnapshot, collection, query, where, documentId } from 'firebase/firestore'
+import { db } from '../../firebase'
 
-import Link from "next/link";
+import Link from "next/link"
 
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai'
 
-import { GroupContext } from "../../contexts/GroupContext";
+import { GroupContext } from "../../contexts/GroupContext"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Sidebar({session}){
-    const { group, setGroup, 
-            setSeeCreateGroup,
+    const { group, setGroup,
             setSeeHome,
             setSeeChecked,
             setSeeBranches,
             setSeeRemoved } = React.useContext(GroupContext)
 
-    const [ userGroups, setUserGroups ] = useState([])
+    const { userGroups } = React.useContext(AuthContext)
+
     const [ groups, setGroups ] = useState([])
-
-    useEffect(() => {
-        if(session != null){
-            const unsubscribe = onSnapshot(query(collection(db, `users/${session.uid}/groups`), orderBy('joinedAt', 'desc')), 
-            (snapshot) => {
-              let _userGroups = []
-
-              snapshot.docs.forEach(g => {
-                  _userGroups.push(g.data().groupId)
-              })
-
-              setUserGroups(_userGroups)
-            })
-
-            return () => {
-                unsubscribe()
-            }
-        }
-    }, [session])
 
     useEffect(() => {
         if(session != null && userGroups.length > 0){
@@ -57,9 +39,11 @@ export default function Sidebar({session}){
     
     return (
         <div className={styles.sidebar}>
-            <div className={styles.create} onClick={() => setSeeCreateGroup(true)}>
-                <AiOutlinePlus className={styles.icon}/>
-            </div>
+            <Link href='/'>
+                <div className={styles.create}>
+                    <AiOutlineHome className={styles.icon}/>
+                </div>
+            </Link>
             <div className={styles.groups}>
                 {groups?.sort((a, b) => userGroups.indexOf(a.id) - userGroups.indexOf(b.id)).map((g) => {
                     return (
@@ -68,7 +52,7 @@ export default function Sidebar({session}){
                             <img 
                             onClick={() => {
                                 if(g.id != group){
-                                    setGroup(g.id)
+                                    setGroup({id: g.id, name: g.data().name})
 
                                     setSeeHome(true)
                                     setSeeChecked(false)

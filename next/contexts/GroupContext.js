@@ -25,7 +25,7 @@ const GroupProvider = ({children}) => {
     
     useEffect(() => {
         if(group != null){
-            const unsubscribe = onSnapshot(query((collection(db, 'groups')), where(documentId(), '==', group)), 
+            const unsubscribe = onSnapshot(query((collection(db, 'groups')), where(documentId(), '==', group.id)), 
             (snapshot) => {
               setCurrentGroupData(snapshot.docs)
             })

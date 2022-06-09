@@ -4,11 +4,14 @@ import Head from 'next/head'
 import Main from '../components/Main'
 
 import { AuthContext } from "../contexts/AuthContext";
+import { GroupContext } from "../contexts/GroupContext";
 
 export default function Home() {
   const { setLoading } = React.useContext(AuthContext)
+  const { setGroup } = React.useContext(GroupContext)
 
   useEffect(() => {
+    setGroup(null)
     setLoading(false)
   }, [])
 

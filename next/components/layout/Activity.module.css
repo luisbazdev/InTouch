@@ -1,0 +1,59 @@
+.activity{
+    display: flex;
+    column-gap: 15px;
+    padding: 10px 0 10px 0;
+}
+
+.checked{
+    font-weight: bold;
+    color: rgb(78, 235, 39);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.deleted{
+    color: rgb(235, 39, 39);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.created{
+    color: rgb(39, 147, 235);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+
+.minus{
+    color: red;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #e7e7e7;
+    padding-bottom: 10px;
+    width: 100%;
+    row-gap: 5px;
+}
+
+._info{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.branch{
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+.userPic{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    object-fit: cover;
+}

@@ -11,12 +11,12 @@ export default function CheckModal({group, selected, setSelected, close}){
 
     function finish(){
         for (let i = 0; i < selected.length; i++) {
-            var taskRef = doc(db, 'groups', `${group}/tasks/${selected[i].id}`);
+            var taskRef = doc(db, 'groups', `${group.id}/tasks/${selected[i].id}`);
 
             updateDoc(taskRef, {
+                lastModifiedAt: serverTimestamp(),
                 completed: true,
-                removed: true,
-                finishedAt: serverTimestamp()
+                completedAt: serverTimestamp()
             })
         }
 

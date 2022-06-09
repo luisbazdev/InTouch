@@ -24,18 +24,22 @@ export default function NewTaskModal({session, group, close}){
     const [taskBranch, setTaskBranch] = useState('')
     const [taskColor, setTaskColor] = useState('')
 
-    function submitTask(task, note, completed, owner, branch, color){
-        let collRef = collection(db, `groups/${group}/tasks`)
+    function submitTask(task, note, completed, ownerId, ownerName, branch, color){
+        let collRef = collection(db, `groups/${group.id}/tasks`)
         let docRef = doc(collRef)
 
         setDoc(docRef, {
             task,
             note,
             completed,
-            owner,
+            ownerId,
+            ownerName,
             branch,
             color,
+            groupId: group.id,
+            groupName: group.name,
             deleted: false,
+            lastModifiedAt: serverTimestamp(),
             createdAt: serverTimestamp()
         })
 
@@ -48,6 +52,19 @@ export default function NewTaskModal({session, group, close}){
     }
 
     useEffect(() => {
+        if(group != null){
+            const unsubscribe = onSnapshot(collection(db, `groups/${group.id}/branches`), 
+            (snapshot) => {
+              setBranches(snapshot.docs)
+              setLoading(false)
+            })
+            return () => {
+                unsubscribe()
+            }
+        }
+    }, [group])
+
+    useEffect(() => {
         
         const opts = []
 
@@ -58,19 +75,6 @@ export default function NewTaskModal({session, group, close}){
         setOptions(opts)
 
     }, [branches])
-
-    useEffect(() => {
-        if(group != null){
-            const unsubscribe = onSnapshot(collection(db, `groups/${group}/branches`), 
-            (snapshot) => {
-              setBranches(snapshot.docs)
-              setLoading(false)
-            })
-            return () => {
-                unsubscribe()
-            }
-        }
-    }, [group])
 
     const selectStyles = {
         singleValue: (styles, {data}) => ({...styles, color: data.color}),
@@ -128,7 +132,7 @@ export default function NewTaskModal({session, group, close}){
                 <div className={styles.submit}>
                     <button 
                     disabled={(!task || !taskBranch || !taskColor)}
-                    onClick={() => submitTask(task, taskNote, false, session.uid, taskBranch, taskColor)}
+                    onClick={() => submitTask(task, taskNote, false, session.uid, session.username, taskBranch, taskColor)}
                     >Create</button>
                 </div>
             </div>

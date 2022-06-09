@@ -15,6 +15,8 @@ import NewGroupModal from "./modals/NewGroupModal";
 import CheckModal from "./modals/CheckModal";
 import RemoveModal from "./modals/RemoveModal";
 
+import Welcome from "./layout/Welcome";
+
 import ReactLoading from 'react-loading';
 
 export default function Main(){
@@ -53,11 +55,17 @@ export default function Main(){
 
             <Sidebar session={session}/>
             
+            {group == null && <div className={styles.home}>
+                <Welcome session={session}/>
+            </div>}
+
             {group != null && <Header/>}
-            <div className={styles.main}>
-                {group != null && <Editor group={group} session={session}/>}
-            </div>
-            {/* <button onClick={logOut}>log out</button> */}
+            {group != null && (
+                <div className={styles.main}>
+                    <Editor group={group} session={session}/>
+                </div>
+            )}
+            {/* <button onClick={logOut}>logout</button> */}
         </div>
     )
 }

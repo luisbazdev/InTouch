@@ -6,7 +6,7 @@ import { db, storage } from '../../firebase';
 
 import { nanoid } from 'nanoid'
 
-import { collection, addDoc, serverTimestamp, setDoc, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
 import { AiOutlineClose } from "react-icons/ai";
@@ -39,7 +39,7 @@ export default function NewGroupModal({session, close}){
         }
     }
 
-    function createGroup(name, description, overview, owner){
+    function createGroup(name, description, overview, ownerId, ownerName){
         const imgRef = ref(storage, `groups/${nanoid()}`)
 
         uploadString(imgRef, picture, 'data_url').then((snapshot) => {
@@ -49,7 +49,8 @@ export default function NewGroupModal({session, close}){
                     name,
                     description,
                     overview,
-                    owner,
+                    ownerId,
+                    ownerName,
                     picture: URL,
                     members: [session.uid],
                     createdAt: serverTimestamp()
@@ -72,7 +73,7 @@ export default function NewGroupModal({session, close}){
                         joinedAt: serverTimestamp()
                     })
 
-                    setGroup(group.id)
+                    setGroup({name, id: group.id})
                     router.push(`/g/${group.id}`)
                 })
             })
@@ -112,7 +113,7 @@ export default function NewGroupModal({session, close}){
                 <div className={styles.submit}>
                     <button className={styles.button} 
                     disabled={(!name || !description || !overview || !picture)} 
-                    onClick={() => createGroup(name, description, overview, session.uid)}
+                    onClick={() => createGroup(name, description, overview, session.uid, session.username)}
                     >Create Group</button>
                 </div>
             </div>
