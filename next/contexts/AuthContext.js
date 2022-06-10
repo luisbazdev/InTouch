@@ -48,9 +48,8 @@ const AuthProvider = ({children}) => {
                 const _session = { username, email, pictureURL, uid}
                 setSession(_session)
 
-                if(router.pathname == '/g/[groupId]' || router.pathname == '/login'){
+                if(router.pathname == '/g/[groupId]' || router.pathname == '/login')
                     router.push('/')
-                }
             } 
             else{
               if(router.pathname == '/' || router.pathname == '/g/[groupId]')
