@@ -19,7 +19,6 @@ export default function Activity({activity}){
             const _profilePicture = userSnap.data().picture
     
             setProfilePicture(_profilePicture)
-            console.log(_profilePicture)
         }
 
         fetchProfilePicture()

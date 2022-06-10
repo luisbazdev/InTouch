@@ -7,11 +7,12 @@ import { GroupContext } from "../../contexts/GroupContext";
 
 export default function Menu(){
 
-    const { setSeeNewTaskModal, setSeeNewBranchModal } = React.useContext(GroupContext)
+    const { setSeeAddMemberModal, setSeeNewTaskModal, setSeeNewBranchModal } = React.useContext(GroupContext)
 
     return (
         <div className={styles.menu}>
             <MenuMain 
+               setSeeAddMemberModal={setSeeAddMemberModal}
                setSeeNewTaskModal={setSeeNewTaskModal}
                setSeeNewBranchModal={setSeeNewBranchModal}/>
         </div>

@@ -18,6 +18,7 @@ import RemoveModal from "./modals/RemoveModal";
 import Welcome from "./layout/Welcome";
 
 import ReactLoading from 'react-loading';
+import InviteModal from "./modals/InviteModal";
 
 export default function Main(){
 
@@ -35,6 +36,8 @@ export default function Main(){
             setSeeNewBranchModal,
             seeRemoveModal,
             setSeeRemoveModal,
+            seeAddMemberModal,
+            setSeeAddMemberModal,
             group } = React.useContext(GroupContext)
 
     if(loading){
@@ -52,6 +55,7 @@ export default function Main(){
             { seeCreateGroup && <NewGroupModal session={session} close={setSeeCreateGroup}/>}
             { seeCheckModal && <CheckModal session={session} group={group} close={setSeeCheckModal} selected={selected} setSelected={setSelected}/>}
             { seeRemoveModal && <RemoveModal session={session} group={group} close={setSeeRemoveModal} selected={selected} setSelected={setSelected}/>}
+            { seeAddMemberModal && <InviteModal session={session} group={group} close={setSeeAddMemberModal}/>}
 
             <Sidebar session={session}/>
             
@@ -65,7 +69,6 @@ export default function Main(){
                     <Editor group={group} session={session}/>
                 </div>
             )}
-            {/* <button onClick={logOut}>logout</button> */}
         </div>
     )
 }

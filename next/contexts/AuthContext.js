@@ -73,6 +73,7 @@ const AuthProvider = ({children}) => {
           if(!docSnap.exists()){
             setDoc(doc(db, "users", uid), {
                 name: username,
+                email,
                 picture: pictureURL,
                 uid,
             });

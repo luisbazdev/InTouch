@@ -1,0 +1,98 @@
+.bg{
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: rgba(22, 22, 22, 0.897);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal{
+    overflow-y: auto;
+    color: #3f3d47;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+    border-radius: 2%;
+    background-color: #ffffff;
+    width: 500px;
+    height: 500px;
+}
+
+.modal input:focus, .modal textarea:focus{
+    outline: none;
+}
+
+.modal input, .modal textarea{
+    color: #3f3d47;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 10px 10px;
+    border: 2px solid #5add5a;
+    border-radius: 10px;
+}
+
+.modal textarea{
+    height: 135px;
+}
+
+.header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close{
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    right: 0;
+    display: flex;
+    color: #ffffff;
+    background-color: #5add5a;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon{
+    color: #ffffff;
+    width: 19px;
+    height: 19px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.submit{
+    padding: 10px 0;
+    border-radius: 5px;
+    background-color: #5add5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit button{
+    font-size: medium;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.loading{
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2%;
+    width: 500px;
+    height: 500px;
+}

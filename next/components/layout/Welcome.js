@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
-import { onSnapshot, query, where, Timestamp, orderBy, collectionGroup, limit } from 'firebase/firestore';
+import { onSnapshot, query, where, Timestamp, orderBy, collection, collectionGroup, limit } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { GroupContext } from "../../contexts/GroupContext";
 
 import Activity from './Activity'
+import Invitation from './Invitation';
 
 import { HiUserGroup } from 'react-icons/hi'
 import { IoIosLogOut } from 'react-icons/io'
@@ -15,6 +16,7 @@ import styles from './Welcome.module.css'
 
 export default function Welcome({session}){
     const [recent, setRecent] = useState([])
+    const [invitations, setInvitations] = useState([])
 
     const { setSeeCreateGroup } = React.useContext(GroupContext)
 
@@ -29,7 +31,6 @@ export default function Welcome({session}){
         where('groupId', 'in', userGroups), 
         where('lastModifiedAt', '>', today), 
         orderBy('lastModifiedAt', 'desc'),
-        // limit(10)
         ),
         (snapshot) => {
           setRecent(snapshot.docs)
@@ -40,6 +41,23 @@ export default function Welcome({session}){
         }
     }
     }, [session, userGroups])
+
+    useEffect(() => {
+        if(session != null){
+            const unsubscribe = onSnapshot(query(collection(db, 'invitations'), where('to', '==', session.email)), 
+            (snapshot) => {
+                setInvitations(snapshot.docs)
+            }) 
+            
+            return () => {
+                unsubscribe()
+            }
+        }
+    }, [session])
+
+    useEffect(() => {
+        console.log(invitations)
+    }, [invitations])
 
     return (
         <div className={styles.welcome}>
@@ -75,7 +93,7 @@ export default function Welcome({session}){
                         <h2>Invitations</h2>
                     </div>
                     <div className={styles.thing2}>
-                        
+                        {invitations.map((inv) => <Invitation key={inv.id} session={session} invitation={inv.data()}/>)}
                     </div>
                 </div>
             </div>

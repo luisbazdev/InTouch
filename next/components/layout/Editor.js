@@ -19,7 +19,8 @@ export default function Editor({group, session}){
         seeHome, setSeeHome,
         seeChecked, setSeeChecked,
         seeBranches, setSeeBranches,
-        seeRemoved, setSeeRemoved
+        seeRemoved, setSeeRemoved,
+        seeMembers, setSeeMembers
     } = React.useContext(GroupContext)
 
     return (
@@ -33,12 +34,15 @@ export default function Editor({group, session}){
             setSeeBranches={setSeeBranches}
             seeRemoved={seeRemoved}
             setSeeRemoved={setSeeRemoved}
+            seeMembers={seeMembers}
+            setSeeMembers={setSeeMembers}
             />
 
             {seeHome && <Tasks group={group} styles={styles}/>}
             {seeChecked && <Checked group={group} styles={styles}/>}
             {seeBranches && <Branches group={group} styles={styles}/>}    
             {seeRemoved && <Removed group={group} styles={styles}/>}    
+            {/* {seeMembers && <Members group={group} styles={styles}/>}     */}
 
             <Menu group={group} session={session}/>
         </div>

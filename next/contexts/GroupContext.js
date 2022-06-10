@@ -14,6 +14,7 @@ const GroupProvider = ({children}) => {
     const [seeChecked, setSeeChecked] = useState(false)
     const [seeBranches, setSeeBranches] = useState(false)
     const [seeRemoved, setSeeRemoved] = useState(false)
+    const [seeMembers, setSeeMembers] = useState(false)
 
     const [selected, setSelected] = useState([])
 
@@ -22,6 +23,7 @@ const GroupProvider = ({children}) => {
     const [seeNewTaskModal, setSeeNewTaskModal] = useState(false)
     const [seeNewBranchModal, setSeeNewBranchModal] = useState(false)
     const [seeRemoveModal, setSeeRemoveModal] = useState(false)
+    const [seeAddMemberModal, setSeeAddMemberModal] = useState(false)
     
     useEffect(() => {
         if(group != null){
@@ -48,7 +50,9 @@ const GroupProvider = ({children}) => {
         seeHome, setSeeHome,
         seeChecked, setSeeChecked,
         seeBranches, setSeeBranches,
-        seeRemoved, setSeeRemoved
+        seeRemoved, setSeeRemoved,
+        seeMembers, setSeeMembers,
+        seeAddMemberModal, setSeeAddMemberModal
     }
 
     return (
