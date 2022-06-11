@@ -25,7 +25,9 @@ export default function InviteModal({session, group, close}){
             // Add state to invitations such as
             // 'accepted', 'deleted' or 'pending'.
             setDoc(docRef, {
+                state: 'pending',
                 owner: session.username,
+                ownerId: session.uid,
                 from: session.email,
                 to: member,
                 groupId: group.id,

@@ -12,10 +12,13 @@ import Invitation from './Invitation';
 import { HiUserGroup } from 'react-icons/hi'
 import { IoIosLogOut } from 'react-icons/io'
 
+import { MdGroup } from 'react-icons/md'
+import { TiUserAdd } from 'react-icons/ti'
+
 import styles from './Welcome.module.css'
 
 export default function Welcome({session}){
-    const [recent, setRecent] = useState([])
+    const [activity, setActivity] = useState([])
     const [invitations, setInvitations] = useState([])
 
     const { setSeeCreateGroup } = React.useContext(GroupContext)
@@ -33,7 +36,7 @@ export default function Welcome({session}){
         orderBy('lastModifiedAt', 'desc'),
         ),
         (snapshot) => {
-          setRecent(snapshot.docs)
+          setActivity(snapshot.docs)
         })
 
         return () => {
@@ -44,7 +47,7 @@ export default function Welcome({session}){
 
     useEffect(() => {
         if(session != null){
-            const unsubscribe = onSnapshot(query(collection(db, 'invitations'), where('to', '==', session.email)), 
+            const unsubscribe = onSnapshot(query(collection(db, 'invitations'), where('to', '==', session.email), where('state', '==', 'pending')), 
             (snapshot) => {
                 setInvitations(snapshot.docs)
             }) 
@@ -55,45 +58,53 @@ export default function Welcome({session}){
         }
     }, [session])
 
-    useEffect(() => {
-        console.log(invitations)
-    }, [invitations])
-
     return (
         <div className={styles.welcome}>
-            <div className={styles.profile}>
-                <div className={styles.user}>
-                    <img src={session?.pictureURL}/>
-                    <small>{session?.username}</small>
-                    <div className={styles.auth}>
-                        <div className={styles.auth_button} onClick={logOut}>
-                            <small>Exit</small>
-                            <IoIosLogOut className={styles.auth_icon}/> 
-                        </div>
+            <div className={styles.header}>
+                <div className={styles.nav}>
+                    <div className={styles.nav_activity}>
+                        <small>General</small>
+                    </div>
+                    <div className={styles.nav_invitations}>
+                        <small>Social</small>
+                    </div>
+                    <div className={styles.nav_invitations}>
+                        <small>Help</small>
                     </div>
                 </div>
-                <div className={styles.options}>
-                    <div className={styles.option} onClick={() => setSeeCreateGroup(true)}>
-                        <HiUserGroup className={styles.option_icon}/> 
-                        <small><strong>Create group</strong></small>
+
+                <div className={styles.config}>
+                    <div className={styles.creatable}>
+                        <div className={styles.new_group} onClick={setSeeCreateGroup}>
+                            <MdGroup className={styles.icon}/>
+                            <small>Create group</small>
+                        </div>
+                        <div className={styles.add_friend}>
+                            <TiUserAdd className={styles.icon}/>
+                            <small>Add friend</small>
+                        </div>
+                    </div>
+                    <div className={styles.profile}>
+                        <img src={session?.pictureURL}/>
                     </div>
                 </div>
             </div>
+
             <div className={styles.main}>
                 <div className={styles.activity}>
-                    <div className={styles.header}>
+                    <div className={styles.activity_header}>
                         <h2>Activity</h2>
                     </div>
-                    <div className={styles.thing}>
-                        {recent.map((r) => <Activity key={r.id} activity={r.data()}/>)}
+                    <div className={styles.activity_container}>
+                        {activity.map((r) => <Activity key={r.id} activity={r.data()}/>)}
                     </div>
                 </div>
                 <div className={styles.invitations}>
-                    <div className={styles.header}>
+                    <div className={styles.invitations_header}>
                         <h2>Invitations</h2>
                     </div>
-                    <div className={styles.thing2}>
-                        {invitations.map((inv) => <Invitation key={inv.id} session={session} invitation={inv.data()}/>)}
+                    <div className={styles.invitations_container}>
+                        {invitations.map((inv) => <Invitation key={inv.id} session={session} invitation={inv.data()} invitationId={inv.id}/>)}
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 import styles from './Activity.module.css'
+import Link from 'next/link';
 
 export default function Activity({activity}){
 
@@ -32,10 +33,11 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscCheck className={styles.checked}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> in {activity.groupName}</p>
+                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
-                                <small>{activity.ownerName} | <strong style={{backgroundColor: activity.color}} className={styles.branch}>@{activity.branch}</strong></small>
+                                <small>{activity.ownerName} · </small>
+                                <small>{activity.lastModifiedAt.toDate().toLocaleTimeString()}</small>
                             </div>
                         </div>
                     </div>)
@@ -44,10 +46,11 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscChromeClose className={styles.deleted}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> in {activity.groupName}</p>
+                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
-                                <small>{activity.ownerName} | <strong style={{backgroundColor: activity.color}} className={styles.branch}>@{activity.branch}</strong></small>
+                                <small>{activity.ownerName} · </small>
+                                <small>{activity.lastModifiedAt.toDate().toLocaleTimeString()}</small>
                             </div>
                         </div>
                     </div>)
@@ -56,10 +59,11 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscAdd className={styles.created}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> in {activity.groupName}</p>
+                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
-                                <small>{activity.ownerName} | <strong style={{backgroundColor: activity.color}} className={styles.branch}>@{activity.branch}</strong></small>
+                                <small>{activity.ownerName} · </small>
+                                <small>{activity.lastModifiedAt.toDate().toLocaleTimeString()}</small>
                             </div>
                         </div>
                     </div>)

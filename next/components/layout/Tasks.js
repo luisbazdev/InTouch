@@ -7,7 +7,7 @@ import Task from './Task'
 
 import { GroupContext } from "../../contexts/GroupContext";
 
-import {FaCheck, FaTrash} from 'react-icons/fa'
+import { FaCheck, FaTrash } from 'react-icons/fa'
 
 import ReactLoading from 'react-loading';
 

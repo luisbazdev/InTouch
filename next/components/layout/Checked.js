@@ -16,7 +16,7 @@ export default function Checked({group, styles}){
 
     useEffect(() => {
         if(group != null){
-            const unsubscribe = onSnapshot(query(collection(db, `groups/${group.id}/tasks`), where('completed', '==', true), orderBy('finishedAt', 'desc')), 
+            const unsubscribe = onSnapshot(query(collection(db, `groups/${group.id}/tasks`), where('completed', '==', true), orderBy('completedAt', 'desc')), 
             (snapshot) => {
               setTasks(snapshot.docs)
               setLoading(false)

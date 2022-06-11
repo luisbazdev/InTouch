@@ -1,0 +1,33 @@
+.invitation{
+    padding: 10px 0;
+    display: flex;
+    align-items:flex-start;
+    column-gap: 5px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.invitation_content{
+    row-gap: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.invitation_buttons{
+    font-size: medium;
+    display: flex;
+    column-gap: 10px;
+}
+
+.invitation_accept, .invitation_reject{
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 2px 5px;
+}
+
+.userPic{
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
+    object-fit: cover;
+}
