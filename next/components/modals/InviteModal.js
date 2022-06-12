@@ -22,8 +22,6 @@ export default function InviteModal({session, group, close}){
             let collRef = collection(db, 'invitations')
             let docRef = doc(collRef)
 
-            // Add state to invitations such as
-            // 'accepted', 'deleted' or 'pending'.
             setDoc(docRef, {
                 state: 'pending',
                 owner: session.username,

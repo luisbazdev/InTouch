@@ -42,7 +42,7 @@
     display: grid;
     align-content: flex-start;
     justify-items: center;
-    row-gap: 35px;
+    /* row-gap: 35px; */
     grid-template-columns: 1fr 1fr;
 }
 
@@ -122,5 +122,6 @@
 }
   
 .masonry_grid_column > div { 
-  margin-bottom: 30px;
+    /* margin-bottom: 30px; */
+    margin-bottom: 20px;
 }

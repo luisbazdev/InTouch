@@ -50,24 +50,6 @@ export default function Tasks({group, styles}){
     return (
         <div className={styles.content}>
             <div className={styles.tasks}>
-                <div className={styles.options}>
-                    <div className={`${styles.button_check} ${selected.length <= 0 ? styles.disabled : ''}`}>
-                        <FaCheck className={styles.button_check_icon} onClick={() => checkRef.current.click()}/>
-                        <button 
-                        hidden
-                        ref={checkRef}
-                        disabled={selected.length <= 0}
-                        onClick={() => setSeeCheckModal(true)}></button>
-                    </div>
-                    <div className={`${styles.button_check} ${selected.length <= 0 ? styles.disabled : ''}`}>
-                        <FaTrash className={styles.button_check_icon} onClick={() => removeRef.current.click()}/>
-                        <button 
-                        hidden
-                        ref={removeRef}
-                        disabled={selected.length <= 0}
-                        onClick={() => setSeeRemoveModal(true)}></button>
-                    </div>
-                </div>
                 <Masonry
                     breakpointCols={2}
                     className={styles.masonry_grid}
@@ -75,7 +57,7 @@ export default function Tasks({group, styles}){
                     {tasks?.map(task => {
                         return <Task 
                         key={task.id} 
-                        task={task} 
+                        task={task.data()} 
                         selected={selected.find((t) => t.id == task.id)} 
                         selectedTasks={selected} 
                         setSelected={setSelected}/>

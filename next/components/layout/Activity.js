@@ -6,7 +6,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 import styles from './Activity.module.css'
-import Link from 'next/link';
 
 export default function Activity({activity}){
 
