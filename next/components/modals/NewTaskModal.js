@@ -90,7 +90,7 @@ export default function NewTaskModal({session, group, close}){
             return {
                 ... styles,
                 padding: '2px 2px',
-                border: '2px solid #5add5a',
+                border: '2px solid #8589cc',
                 borderRadius: '10px'
             }
         }

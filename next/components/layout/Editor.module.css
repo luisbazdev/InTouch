@@ -1,6 +1,6 @@
 .editor{
     display: grid;
-    grid-template-columns: 75px minmax(900px, 900px) auto;
+    grid-template-columns: 170px minmax(800px, 800px) 1fr;
     height: 100%;
 }
 
