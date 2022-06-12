@@ -5,6 +5,8 @@ import { db } from '../../firebase'
 
 import styles from './Task.module.css'
 
+import { BsThreeDots } from 'react-icons/bs'
+
 export default function Task({task, selected, selectedTasks, setSelected, disabled}){
   const [profilePicture, setProfilePicture] = useState()
 
@@ -23,6 +25,7 @@ export default function Task({task, selected, selectedTasks, setSelected, disabl
 
   return (
       <div className={`${styles.task_card}`}>
+          <BsThreeDots className={styles.task_options}/>
           <div className={styles.task_branch} style={{backgroundColor: task.color}}>
             <p>@{task.branch}</p>
           </div>

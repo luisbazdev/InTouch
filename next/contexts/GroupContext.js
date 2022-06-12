@@ -16,8 +16,6 @@ const GroupProvider = ({children}) => {
     const [seeRemoved, setSeeRemoved] = useState(false)
     const [seeMembers, setSeeMembers] = useState(false)
 
-    const [selected, setSelected] = useState([])
-
     const [seeCreateGroup, setSeeCreateGroup] = useState(false)
     const [seeCheckModal, setSeeCheckModal] = useState(false)
     const [seeNewTaskModal, setSeeNewTaskModal] = useState(false)
@@ -39,7 +37,6 @@ const GroupProvider = ({children}) => {
     }, [group])
 
     const data = {
-        selected, setSelected,
         seeCreateGroup, setSeeCreateGroup,
         seeCheckModal, setSeeCheckModal,
         seeNewTaskModal, setSeeNewTaskModal,

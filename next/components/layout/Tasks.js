@@ -21,7 +21,7 @@ export default function Tasks({group, styles}){
     const checkRef = useRef(null)
     const removeRef = useRef(null)
 
-    const { selected, setSelected, setSeeCheckModal, setSeeRemoveModal, setSeeNewTaskModal } = React.useContext(GroupContext)
+    const { setSeeCheckModal, setSeeRemoveModal, setSeeNewTaskModal } = React.useContext(GroupContext)
 
     useEffect(() => {
         if(group != null){
@@ -57,10 +57,7 @@ export default function Tasks({group, styles}){
                     {tasks?.map(task => {
                         return <Task 
                         key={task.id} 
-                        task={task.data()} 
-                        selected={selected.find((t) => t.id == task.id)} 
-                        selectedTasks={selected} 
-                        setSelected={setSelected}/>
+                        task={task.data()}/>
                     })}
                 </Masonry>
             </div>
