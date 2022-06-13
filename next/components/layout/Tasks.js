@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../../firebase';
@@ -6,8 +6,6 @@ import { db } from '../../firebase';
 import Task from './Task'
 
 import { GroupContext } from "../../contexts/GroupContext";
-
-import { FaCheck, FaTrash } from 'react-icons/fa'
 
 import ReactLoading from 'react-loading';
 
@@ -18,10 +16,7 @@ export default function Tasks({group, styles}){
     const [tasks, setTasks] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    const checkRef = useRef(null)
-    const removeRef = useRef(null)
-
-    const { setSeeCheckModal, setSeeRemoveModal, setSeeNewTaskModal } = React.useContext(GroupContext)
+    const { setSeeNewTaskModal } = React.useContext(GroupContext)
 
     useEffect(() => {
         if(group != null){

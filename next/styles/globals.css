@@ -4,6 +4,21 @@
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #d6d6d6 #ffffff;
+}
+
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #6a6fb3;
+  border-radius: 10px;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   width: 100vw;

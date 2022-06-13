@@ -22,6 +22,7 @@
 }
 
 .content{
+    box-shadow: inset 0px 25px 10px 0px rgb(255, 255, 255);
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;

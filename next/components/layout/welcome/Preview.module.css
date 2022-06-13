@@ -1,0 +1,23 @@
+.preview{
+    width: 100%;
+    min-height: min-content;
+    /* height: min-content; */
+    max-height: 100%;
+    border: 2px solid #dfdfdf;
+    border-radius: 13px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview_header{
+    background-color: rgb(247, 247, 247);
+    padding: 15px 25px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.preview_container{
+    height: min-content;
+    overflow-y: auto;
+}

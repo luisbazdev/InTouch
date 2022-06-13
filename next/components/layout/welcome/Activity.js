@@ -3,13 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { VscCheck, VscAdd, VscChromeClose } from "react-icons/vsc";
 
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db } from '../../../firebase';
+
+import { WelcomeContext } from '../../../contexts/WelcomeContext';
 
 import styles from './Activity.module.css'
 
 export default function Activity({activity}){
-
+    
     const [profilePicture, setProfilePicture] = useState()
+    
+    const { setPreview } = React.useContext(WelcomeContext)
 
     useEffect(() => {
         async function fetchProfilePicture(){
@@ -24,7 +28,6 @@ export default function Activity({activity}){
         fetchProfilePicture()
     }, [])
 
-
     function switchActivity(){
             switch(true){
                 case (activity.completed == true):
@@ -32,7 +35,7 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscCheck className={styles.checked}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
+                            <p className={styles.activity_title} onClick={() => setPreview(activity)}><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
                                 <small>{activity.ownerName} · </small>
@@ -45,7 +48,7 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscChromeClose className={styles.deleted}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
+                            <p className={styles.activity_title} onClick={() => setPreview(activity)}><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
                                 <small>{activity.ownerName} · </small>
@@ -58,7 +61,7 @@ export default function Activity({activity}){
                     <div className={styles.activity}>
                         <VscAdd className={styles.created}/>
                         <div className={styles.info}>
-                            <p><strong>{activity.task}</strong> › {activity.groupName}</p>
+                            <p className={styles.activity_title} onClick={() => setPreview(activity)}><strong>{activity.task}</strong> › {activity.groupName}</p>
                             <div className={styles._info}>
                                 <img src={profilePicture} className={styles.userPic}/>
                                 <small>{activity.ownerName} · </small>

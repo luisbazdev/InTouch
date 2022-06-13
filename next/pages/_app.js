@@ -2,12 +2,15 @@ import '../styles/globals.css'
 
 import { AuthProvider } from '../contexts/AuthContext'
 import { GroupProvider } from '../contexts/GroupContext'
+import { WelcomeProvider } from '../contexts/WelcomeContext'
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
       <GroupProvider>
-        <Component {...pageProps} />
+        <WelcomeProvider>
+          <Component {...pageProps} />
+        </WelcomeProvider>
       </GroupProvider>
     </AuthProvider>
   )

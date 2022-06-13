@@ -1,0 +1,8 @@
+.main{
+    margin: 15px;
+    overflow-y: auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 750px 1fr;
+    column-gap: 10px;
+}

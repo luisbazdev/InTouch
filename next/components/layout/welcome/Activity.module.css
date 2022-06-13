@@ -4,6 +4,11 @@
     padding: 10px 0 10px 0;
 }
 
+.activity_title{
+    width: fit-content;
+    cursor: pointer;
+}
+
 .checked{
     font-weight: bold;
     color: rgb(78, 235, 39);

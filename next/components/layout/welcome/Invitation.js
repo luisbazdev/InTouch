@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { db } from '../../firebase'
+import { db } from '../../../firebase'
 import { collection, serverTimestamp, setDoc, doc, getDoc, arrayUnion, updateDoc } from 'firebase/firestore'
 
 import styles from './Invitation.module.css'
