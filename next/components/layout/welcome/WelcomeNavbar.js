@@ -39,10 +39,6 @@ export default function WelcomeNavbar({session}){
                         <MdGroup className={styles.icon}/>
                         <small>Create group</small>
                     </div>
-                    <div className={styles.add_friend}>
-                        <TiUserAdd className={styles.icon}/>
-                        <small>Add friend</small>
-                    </div>
                 </div>
                 <div className={styles.profile}>
                     <img src={session?.pictureURL}/>

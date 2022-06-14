@@ -14,7 +14,7 @@ export default function General({session}){
     return (
     <div className={styles.main}>
         <Activities session={session}/>
-        {preview && <Preview preview={preview}/>}
+        {preview != null && <Preview preview={preview}/>}
     </div>
     )
 }

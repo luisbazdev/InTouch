@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
 
-import styles from './Task.module.css'
-
 import { BsThreeDots } from 'react-icons/bs'
 
+import styles from './Task.module.css'
+
 export default function Task({task, preview}){
+  
   const [profilePicture, setProfilePicture] = useState()
 
   useEffect(() => {

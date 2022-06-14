@@ -1,0 +1,26 @@
+.friend_request{
+    padding: 10px 0;
+    display: flex;
+    align-items:flex-start;
+    column-gap: 5px;
+}
+
+.friend_request_buttons{
+    font-size: medium;
+    display: flex;
+    column-gap: 10px;
+}
+
+.friend_request_accept, .friend_request_reject{
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 2px 5px;
+}
+
+.profilePicture{
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
+    object-fit: cover;
+}

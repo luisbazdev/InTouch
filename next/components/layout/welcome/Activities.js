@@ -48,7 +48,7 @@ export default function Activities({session}){
                 <h2>Activity</h2>
             </div>
             <div className={styles.activities_container}>
-                {activities.map((r) => <Activity key={r.id} activity={r.data()}/>)}
+                {activities && activities.map((r) => <Activity key={r.id} activity={r.data()}/>)}
             </div>
         </div>
     )

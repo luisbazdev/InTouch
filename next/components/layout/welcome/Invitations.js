@@ -26,12 +26,7 @@ export default function Invitations({session}){
 
     return (
         <div className={styles.invitations}>
-            <div className={styles.invitations_header}>
-                <h2>Invitations</h2>
-            </div>
-            <div className={styles.invitations_container}>
-                {invitations.map((inv) => <Invitation key={inv.id} session={session} invitation={inv.data()} invitationId={inv.id}/>)}
-            </div>
+            {invitations.map((inv) => <Invitation key={inv.id} session={session} invitation={inv.data()} invitationId={inv.id}/>)}
         </div>
     )
 }

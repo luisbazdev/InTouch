@@ -48,4 +48,7 @@ p{
   margin: 0;
   padding: 0;
 }
-
+ 
+input, input::placeholder{
+  font-family: 'Ubuntu', sans-serif;
+}

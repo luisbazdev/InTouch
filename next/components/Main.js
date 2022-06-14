@@ -60,7 +60,7 @@ export default function Main(){
             <Sidebar session={session}/>
             
             {group == null && <div className={styles.home}>
-                <Welcome session={session}/>
+                <Welcome session={session} group={group}/>
             </div>}
 
             {group != null && <Header/>}

@@ -9,7 +9,7 @@ import Social from './welcome/Social'
 
 import styles from './Welcome.module.css'
 
-export default function Welcome({session}){
+export default function Welcome({session, group}){
 
     const { seeGeneral, seeSocial } = React.useContext(WelcomeContext)
 
@@ -18,7 +18,7 @@ export default function Welcome({session}){
             <WelcomeNavbar session={session}/>
 
             { seeGeneral ? <General session={session}/> : null}
-            { seeSocial ? <Social session={session}/> : null}
+            { seeSocial ? <Social session={session} group={group}/> : null}
         </div>
     )
 }

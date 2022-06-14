@@ -75,6 +75,7 @@ const AuthProvider = ({children}) => {
                 email,
                 picture: pictureURL,
                 uid,
+                friends: []
             });
           }
 
