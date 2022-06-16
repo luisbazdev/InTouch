@@ -13,15 +13,16 @@ export default function NavBar({
     seeChecked, setSeeChecked, 
     seeBranches, setSeeBranches, 
     seeRemoved, setSeeRemoved,
-    seeMembers, setSeeMembers}){
+    seeMembers, setSeeMembers,
+    seeSettings, setSeeSettings}){
 
-    const { setSeeAddMemberModal, setSeeNewTaskModal, setSeeNewBranchModal } = React.useContext(GroupContext)
+    const { setSeeCreate, setSeeAddMemberModal } = React.useContext(GroupContext)
     
     return (
         <div className={styles.navbar}>
             
             <div className={styles.navbar_buttons}>
-                <div className={styles.navbar_options} onClick={setSeeNewTaskModal}>
+                <div className={styles.navbar_options} onClick={setSeeCreate}>
                     <div className={styles.navbar_button}>
                         <FiPlusCircle/>
                         <small>Create</small>
@@ -43,6 +44,8 @@ export default function NavBar({
                         setSeeChecked(false)
                         setSeeRemoved(false)
                         setSeeBranches(false)
+                        setSeeMembers(false)
+                        setSeeSettings(false)
                         }}>
                         <BiTime className={styles.navbar_icon}/>
                         <small>Pending</small>
@@ -52,6 +55,8 @@ export default function NavBar({
                         setSeeChecked(true)
                         setSeeRemoved(false)
                         setSeeBranches(false)
+                        setSeeMembers(false)
+                        setSeeSettings(false)
                         }}>
                         <BiCheckSquare className={styles.navbar_icon}/>
                         <small>Finished</small>
@@ -61,6 +66,8 @@ export default function NavBar({
                         setSeeChecked(false)
                         setSeeRemoved(true)
                         setSeeBranches(false)
+                        setSeeMembers(false)
+                        setSeeSettings(false)
                         }}>
                         <BiXCircle className={styles.navbar_icon}/>
                         <small>Cancelled</small>
@@ -76,15 +83,31 @@ export default function NavBar({
                         setSeeChecked(false)
                         setSeeRemoved(false)
                         setSeeBranches(true)
+                        setSeeMembers(false)
+                        setSeeSettings(false)
                         }}>
                         <BiGitBranch/>
                         <small>Branches</small>
                     </div>
-                    <div className={styles.navbar_option}>
+                    <div className={`${styles.navbar_option} ${seeMembers ? styles.navbar_selected : ''}`} onClick={() => {
+                        setSeeHome(false)
+                        setSeeChecked(false)
+                        setSeeRemoved(false)
+                        setSeeBranches(false)
+                        setSeeMembers(true)
+                        setSeeSettings(false)
+                        }}>
                         <BiGroup/>
                         <small>Members</small>
                     </div>
-                    <div className={styles.navbar_option}>
+                    <div className={`${styles.navbar_option} ${seeSettings ? styles.navbar_selected : ''}`} onClick={() => {
+                        setSeeHome(false)
+                        setSeeChecked(false)
+                        setSeeRemoved(false)
+                        setSeeBranches(false)
+                        setSeeMembers(false)
+                        setSeeSettings(true)
+                        }}>
                         <FiSettings/>
                         <small>Settings</small>
                     </div>

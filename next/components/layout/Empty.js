@@ -8,9 +8,6 @@ export default function Empty({section, setSeeNewTaskModal}){
         <div className={styles.empty}>
             <div className={styles.empty_container}>
                 <h3>Nothing was found in this section</h3>
-                {(section == 'tasks') && <div className={styles.empty_button} onClick={() => setSeeNewTaskModal(true)}>
-                    <AiOutlinePlus/>
-                </div>}
             </div>
         </div>
     )

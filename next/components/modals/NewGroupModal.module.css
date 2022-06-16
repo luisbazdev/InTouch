@@ -12,6 +12,7 @@
 }
 
 .modal{
+    box-shadow: 0px 5px 15px 0px rgba(148,148,148,1);
     border: 1px solid #dfdfdf;
     color: #3f3d47;
     z-index: 200;

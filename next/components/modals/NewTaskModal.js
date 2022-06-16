@@ -7,14 +7,14 @@ import styles from './NewTaskModal.module.css'
 
 import Select from 'react-select'
 
-import ReactLoading from 'react-loading';
+// import ReactLoading from 'react-loading';
 
-import { AiOutlineClose } from 'react-icons/ai';
+// import { AiOutlineClose } from 'react-icons/ai';
 
 
-export default function NewTaskModal({session, group, close}){
+export default function NewTaskModal({session, group, close, back}){
 
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
 
     const [branches, setBranches] = useState([])
     const [options, setOptions] = useState([])
@@ -56,7 +56,7 @@ export default function NewTaskModal({session, group, close}){
             const unsubscribe = onSnapshot(collection(db, `groups/${group.id}/branches`), 
             (snapshot) => {
               setBranches(snapshot.docs)
-              setLoading(false)
+            //   setLoading(false)
             })
             return () => {
                 unsubscribe()
@@ -78,7 +78,6 @@ export default function NewTaskModal({session, group, close}){
 
     const selectStyles = {
         singleValue: (styles, {data}) => ({...styles, color: data.color}),
-        // option: (styles, {data}) => ({...styles, color: data.color})
         option: (styles, {data}) => {
             return {
                 ...styles,
@@ -90,51 +89,40 @@ export default function NewTaskModal({session, group, close}){
             return {
                 ... styles,
                 padding: '2px 2px',
-                border: '2px solid #8589cc',
+                border: 'none',
                 borderRadius: '10px'
             }
         }
     }
 
-    if(loading)
     return (
-        <div className={styles.bg}>
-            <div className={styles.loading}>
-                <ReactLoading type='spin' color='#33be33'/>
+        <div className={styles.modal}>
+            <div className={styles.header}>
+                <h3>Create a new task</h3>
             </div>
-        </div>
-    )
-
-    return (
-        <div className={styles.bg}>
-            <div className={styles.modal}>
-                <div className={styles.header}>
-                    <h3>Create a new task</h3>
-                    <div className={styles.close} onClick={() => close(false)} >
-                        <AiOutlineClose className={styles.icon}/>
-                    </div>
-                </div>
-                <div className={styles.container}>
-                    <strong>Choose a branch</strong>
-                    <Select options={options} styles={selectStyles} onChange={(task) => {
-                        setTaskBranch(task.value)
-                        setTaskColor(task.color)
-                    }}/>
-                </div>
-                <div className={styles.container}>
-                    <strong>What's the task?</strong>
-                    <input type='text' onChange={(e) => setTask(e.target.value)}/>
-                </div>
-                <div className={styles.container}>
-                    <strong>Optional notes</strong>
-                    <textarea onChange={(e) => setTaskNote(e.target.value)}/>
-                </div>
-                <div className={styles.submit}>
-                    <button 
-                    disabled={(!task || !taskBranch || !taskColor)}
-                    onClick={() => submitTask(task, taskNote, false, session.uid, session.username, taskBranch, taskColor)}
-                    >Create</button>
-                </div>
+            <div className={styles.container}>
+                <input type='text' placeholder='Task' onChange={(e) => setTask(e.target.value)}/>
+            </div>
+            <div className={styles.container}>
+                <textarea placeholder='Notes' onChange={(e) => setTaskNote(e.target.value)}/>
+            </div>
+            <div className={styles.container}>
+                <Select placeholder={'Choose a branch'} options={options} styles={selectStyles} onChange={(task) => {
+                    setTaskBranch(task.value)
+                    setTaskColor(task.color)
+                }}/>
+            </div>
+            <div className={styles.submit}>
+                <small className={styles.back}
+                onClick={back}
+                >Back</small>
+                <small className={styles.cancel}
+                onClick={() => close(false)}
+                >Cancel</small>
+                <small className={styles.confirm}
+                disabled={(!name || !description || !overview || !picture)} 
+                // onClick={() => submitBranch(branchName, branchColor, session.uid, session.username)}
+                >Confirm</small>
             </div>
         </div>
     )

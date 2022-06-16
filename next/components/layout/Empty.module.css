@@ -16,18 +16,3 @@
     border-radius: 10px;
     column-gap: 15px;
 }
-
-.empty_button{
-    cursor: pointer;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #5add5a;
-    color: #ffffff;
-    font-size: 20px;
-    border-radius: 100%;
-    padding: 20px;
-    row-gap: 5px;
-}

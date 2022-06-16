@@ -22,7 +22,7 @@
 }
 
 .content{
-    box-shadow: inset 0px 25px 10px 0px rgb(255, 255, 255);
+    /* box-shadow: inset 0px 25px 10px 0px rgb(255, 255, 255); */
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -43,7 +43,6 @@
     display: grid;
     align-content: flex-start;
     justify-items: center;
-    /* row-gap: 35px; */
     grid-template-columns: 1fr 1fr;
 }
 

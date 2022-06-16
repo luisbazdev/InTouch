@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { collection, onSnapshot, doc, setDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { db } from '../../firebase'
 
-import styles from './InviteModal.module.css'
-
 import { AiOutlineClose } from 'react-icons/ai';
+
+import styles from './InviteModal.module.css'
 
 export default function InviteModal({session, group, close}){
 
@@ -41,20 +41,19 @@ export default function InviteModal({session, group, close}){
         <div className={styles.bg}>
             <div className={styles.modal}>
                 <div className={styles.header}>
-                    <h3>Invite a member to your group</h3>
-                    <div className={styles.close} onClick={() => close(false)} >
-                        <AiOutlineClose className={styles.icon}/>
-                    </div>
+                    <h3>Invite member</h3>
                 </div>
                 <div className={styles.container}>
-                    <strong>Member's email</strong>
-                    <input type='text' onChange={(e) => setMember(e.target.value)}/>
+                    <input type='text' placeholder='Email' onChange={(e) => setMember(e.target.value)}/>
                 </div>
                 <div className={styles.submit}>
-                    <button 
+                    <small className={styles.cancel}
+                    onClick={() => close(false)}
+                    >Cancel</small>
+                    <small className={styles.confirm}
                     disabled={!member}
                     onClick={inviteMember}
-                    >Invite</button>
+                    >Confirm</small>
                 </div>
             </div>
         </div>

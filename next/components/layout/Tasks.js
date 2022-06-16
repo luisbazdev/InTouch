@@ -35,7 +35,7 @@ export default function Tasks({group, styles}){
     if(loading)
         return (
             <div className={styles.loading}>
-                <ReactLoading type='spin' color='#33be33'/>
+                <ReactLoading type='spin' color='#7057d3'/>
             </div>
         )
 

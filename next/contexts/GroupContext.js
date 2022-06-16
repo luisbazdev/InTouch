@@ -15,7 +15,9 @@ const GroupProvider = ({children}) => {
     const [seeBranches, setSeeBranches] = useState(false)
     const [seeRemoved, setSeeRemoved] = useState(false)
     const [seeMembers, setSeeMembers] = useState(false)
+    const [seeSettings, setSeeSettings] = useState(false)
 
+    const [seeCreate, setSeeCreate] = useState(false)
     const [seeCreateGroup, setSeeCreateGroup] = useState(false)
     const [seeCheckModal, setSeeCheckModal] = useState(false)
     const [seeNewTaskModal, setSeeNewTaskModal] = useState(false)
@@ -37,6 +39,7 @@ const GroupProvider = ({children}) => {
     }, [group])
 
     const data = {
+        seeCreate, setSeeCreate,
         seeCreateGroup, setSeeCreateGroup,
         seeCheckModal, setSeeCheckModal,
         seeNewTaskModal, setSeeNewTaskModal,
@@ -49,7 +52,8 @@ const GroupProvider = ({children}) => {
         seeBranches, setSeeBranches,
         seeRemoved, setSeeRemoved,
         seeMembers, setSeeMembers,
-        seeAddMemberModal, setSeeAddMemberModal
+        seeSettings, setSeeSettings,
+        seeAddMemberModal, setSeeAddMemberModal,
     }
 
     return (

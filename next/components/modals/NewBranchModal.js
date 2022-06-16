@@ -4,11 +4,9 @@ import { SwatchesPicker } from 'react-color';
 import { collection, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from '../../firebase'
 
-import { AiOutlineClose } from 'react-icons/ai';
-
 import styles from './NewBranchModal.module.css'
 
-export default function NewBranchModal({session, group, close}){
+export default function NewBranchModal({session, group, close, back}){
     const [branchName, setBranchName] = useState('')
     const [branchColor, setBranchColor] = useState('')
 
@@ -31,29 +29,30 @@ export default function NewBranchModal({session, group, close}){
     }
 
     return (
-        <div className={styles.bg}>
             <div className={styles.modal}>
                 <div className={styles.header}>
                     <h3>Create a new branch</h3>
-                    <div className={styles.close} onClick={() => close(false)} >
-                        <AiOutlineClose className={styles.icon}/>
-                    </div>
                 </div>
                 <div className={styles.container}>
-                    <strong>What's the branch name?</strong>
-                    <input type='text' style={{color: branchColor}} onChange={(e) => setBranchName(e.target.value)}/>
+                    <input type='text' placeholder='Title' style={{color: branchColor}} onChange={(e) => setBranchName(e.target.value)}/>
                 </div>
                 <div className={styles.color}>
-                    <strong>Pick a color for the branch</strong>
+                    <h4>Color</h4>
                     <SwatchesPicker width='100%' onChange={(color) => setBranchColor(color.hex)}/>
                 </div>
                 <div className={styles.submit}>
-                    <button 
-                    disabled={(!branchName || !branchColor)}
+                    <small className={styles.back}
+                    onClick={back}
+                    >Back</small>
+                    <small className={styles.cancel}
+                    disabled={(!name || !description || !overview || !picture)} 
+                    onClick={() => close(false)}
+                    >Cancel</small>
+                    <small className={styles.confirm}
+                    disabled={(!name || !description || !overview || !picture)} 
                     onClick={() => submitBranch(branchName, branchColor, session.uid, session.username)}
-                    >Create</button>
+                    >Confirm</small>
                 </div>
             </div>  
-        </div>
     )
 }

@@ -17,7 +17,9 @@ export default function Sidebar({session}){
             setSeeHome,
             setSeeChecked,
             setSeeBranches,
-            setSeeRemoved } = React.useContext(GroupContext)
+            setSeeRemoved,
+            setSeeMembers,
+            setSeeSettings } = React.useContext(GroupContext)
 
     const { userGroups } = React.useContext(AuthContext)
 
@@ -58,6 +60,8 @@ export default function Sidebar({session}){
                                     setSeeChecked(false)
                                     setSeeBranches(false)
                                     setSeeRemoved(false)
+                                    setSeeMembers(false)
+                                    setSeeSettings(false)
                                 }
                             }} 
                             src={g?.data()?.picture}/>

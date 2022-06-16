@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { db } from '../../../firebase'
 import { collection, serverTimestamp, setDoc, doc, getDoc, arrayUnion, updateDoc } from 'firebase/firestore'
 
@@ -8,6 +10,8 @@ import styles from './Invitation.module.css'
 export default function Invitation({session, invitation, invitationId}){
 
     const [profilePicture, setProfilePicture] = useState()
+
+    const router = useRouter()
 
     useEffect(() => {
         async function fetchProfilePicture(){
@@ -42,6 +46,8 @@ export default function Invitation({session, invitation, invitationId}){
         await updateDoc(groupRef, {
             members: arrayUnion(session.uid)
         });
+
+        router.push(`/g/${invitation.groupId}`)
     }
 
     async function rejectInvitation(){

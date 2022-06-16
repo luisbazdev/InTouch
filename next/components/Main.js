@@ -1,7 +1,5 @@
 import React from "react";
 
-import styles from './Main.module.css'
-
 import { AuthContext } from "../contexts/AuthContext";
 import { GroupContext } from "../contexts/GroupContext";
 
@@ -9,6 +7,7 @@ import Sidebar from "./layout/Sidebar";
 import Editor from "./layout/Editor";
 import Header from "./layout/Header";
 
+import CreateModal from "./modals/CreateModal";
 import NewTaskModal from "./modals/NewTaskModal";
 import NewBranchModal from "./modals/NewBranchModal";
 import NewGroupModal from "./modals/NewGroupModal";
@@ -20,6 +19,8 @@ import Welcome from "./layout/Welcome";
 import ReactLoading from 'react-loading';
 import InviteModal from "./modals/InviteModal";
 
+import styles from './Main.module.css'
+
 export default function Main(){
 
     const { session, loading } = React.useContext(AuthContext)
@@ -30,6 +31,8 @@ export default function Main(){
             setSeeCreateGroup,
             seeCheckModal,
             setSeeCheckModal,
+            seeCreate,
+            setSeeCreate,
             seeNewTaskModal,
             setSeeNewTaskModal,
             seeNewBranchModal,
@@ -50,6 +53,7 @@ export default function Main(){
 
     return (
         <div className={styles.app}>
+            { seeCreate && <CreateModal session={session} group={group} close={setSeeCreate}/>}
             { seeNewTaskModal && <NewTaskModal session={session} group={group} close={setSeeNewTaskModal}/>}
             { seeNewBranchModal && <NewBranchModal session={session} group={group} close={setSeeNewBranchModal}/>}
             { seeCreateGroup && <NewGroupModal session={session} close={setSeeCreateGroup}/>}
