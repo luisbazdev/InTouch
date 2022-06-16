@@ -3,6 +3,6 @@
     overflow-y: auto;
     display: grid;
     /* grid-template-columns: 500px 450px; */
-    grid-template-columns: 700px;
+    grid-template-columns: 1fr;
     column-gap: 10px;
 }

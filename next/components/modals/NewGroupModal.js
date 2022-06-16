@@ -1,19 +1,19 @@
 import React, { useRef, useState } from "react";
 
-import styles from './NewGroupModal.module.css';
-
-import { db, storage } from '../../firebase';
-
 import { nanoid } from 'nanoid'
 
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadString } from "@firebase/storage"
 
-import { AiOutlineClose } from "react-icons/ai";
+import { db, storage } from '../../firebase';
+
+import { BiImageAdd } from 'react-icons/bi'
 
 import { useRouter } from "next/router";
 
 import { GroupContext } from "../../contexts/GroupContext";
+
+import styles from './NewGroupModal.module.css';
 
 export default function NewGroupModal({session, close}){
 
@@ -85,36 +85,40 @@ export default function NewGroupModal({session, close}){
     return (
         <div className={styles.bg}>
             <div className={styles.modal}>
-                <div className={styles.header} onClick={() => close(false)}>
+                <div className={styles.header}>
                     <h3>Create a new group</h3>
-                    <div className={styles.close}>
-                        <AiOutlineClose className={styles.icon}/>
-                    </div>
                 </div>
                 <div className={styles.container}>
-                    <strong>Choose a name for your group</strong>
-                    <input type='text' onChange={(e) => setName(e.target.value)}/>
+                    <input type='text' placeholder="Title" 
+                    onChange={(e) => setName(e.target.value)}/>
                 </div>
                 <div className={styles.container}>
-                    <strong>Give a short description about your group</strong>
-                    <input type='text' onChange={(e) => setDescription(e.target.value)}/>
+                    <input type='text' placeholder="Description"
+                    onChange={(e) => setDescription(e.target.value)}/>
                 </div>
                 <div className={styles.container}>
-                    <strong>General overview/rules</strong>
-                    <textarea onChange={(e) => setOverview(e.target.value)}/>
+                    <textarea placeholder="General overview" onChange={(e) => setOverview(e.target.value)}/>
                 </div>
                 <div className={styles.container}>
                     <input type='file' ref={filePicker} hidden onChange={addPicture}/>
-                    <div className={styles.add} onClick={() => filePicker.current.click()}>
-                        <strong>Click to select group image</strong>
-                        { picture ? (<img className={styles.preview} src={picture}/>) : (<div className={styles.empty_preview}></div>) }
+                    <h4>Picture</h4>
+                    <div className={styles.add}>
+                        { picture ? (<img className={styles.preview} src={picture}/>) : (<div className={styles.empty_preview}></div>)}
+                        <div className={styles.add_button} onClick={() => filePicker.current.click()}>
+                            <BiImageAdd/>
+                            <small>Add image</small>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.submit}>
-                    <button className={styles.button} 
+                    <small className={styles.cancel}
+                    disabled={(!name || !description || !overview || !picture)} 
+                    onClick={() => close(false)}
+                    >Cancel</small>
+                    <small className={styles.confirm}
                     disabled={(!name || !description || !overview || !picture)} 
                     onClick={() => createGroup(name, description, overview, session.uid, session.username)}
-                    >Create Group</button>
+                    >Confirm</small>
                 </div>
             </div>
         </div>

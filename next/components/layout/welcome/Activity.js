@@ -11,7 +11,7 @@ import styles from './Activity.module.css'
 
 export default function Activity({activity}){
     
-    const [profilePicture, setProfilePicture] = useState()
+    const [profilePicture, setProfilePicture] = useState(null)
     
     const { setPreview } = React.useContext(WelcomeContext)
 

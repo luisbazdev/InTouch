@@ -7,10 +7,12 @@
     background-color: rgba(22, 22, 22, 0.897);
     width: 100vw;
     height: 100vh;
+    animation-name: fade;
+    animation-duration: 650ms;
 }
 
 .modal{
-    overflow-y: auto;
+    border: 1px solid #dfdfdf;
     color: #3f3d47;
     z-index: 200;
     display: flex;
@@ -20,7 +22,7 @@
     border-radius: 2%;
     background-color: #ffffff;
     width: 500px;
-    height: 500px;
+    height: min-content;
 }
 
 .modal input:focus, .modal textarea:focus{
@@ -30,39 +32,18 @@
 .modal input, .modal textarea{
     font-family: 'Ubuntu', sans-serif;
     padding: 10px 10px;
-    border: 2px solid #8589cc;
-    border-radius: 10px;
+    border-bottom: 1px solid #d6d6d6;
 }
 
 .modal textarea{
-    height: 135px;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
 }
 
 .header{
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.close{
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    right: 0;
-    display: flex;
-    color: #ffffff;
-    background-color: #8589cc;
-    border-radius: 100%;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.icon{
-    color: #ffffff;
-    width: 19px;
-    height: 19px;
 }
 
 .container{
@@ -79,22 +60,32 @@
 }
 
 .submit{
-    padding: 10px 0;
-    border-radius: 5px;
-    background-color: #8589cc;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+}
+
+.cancel, .confirm{
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 15px;
 }
 
-.submit button{
-    font-size: medium;
-    font-weight: 900;
+.cancel{
+    color: #919191;
+    border: 1px solid #cecece;
+}
+
+.confirm{
+    background-color: #7057d3;
     color: #ffffff;
 }
 
 .add{
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -103,24 +94,29 @@
     width: 100%;
     height: min-content;
     padding: 10px 0;
-    /* background-color: #e7e7e7; */
-    border: 1px dashed #f1f1f1;
     border-radius: 5px;
-    color: #777386;
-    font-weight: 900;
-    font-size: small;
 }
 
-.preview{
+.add_button{
+    cursor: pointer;
+    font-size: 18px;
+    color: #9b9b9b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+
+.preview, .empty_preview{
+    border: 1px solid #e6e6e6;
+    background-color: #ececec;
     object-fit: cover;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 100%;
 }
 
-.empty_preview{
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
-    background-color: #777386;
+@keyframes fade{
+    from {background-color: transparent}
+    to {background-color: rgba(22,22,22,0.897)}
 }
