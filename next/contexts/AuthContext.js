@@ -11,6 +11,7 @@ import { db } from '../firebase'
 const AuthContext = React.createContext(null)
 
 const AuthProvider = ({children}) => {
+    
     const [session, setSession] = useState(null)
     const [loading, setLoading] = useState(true)
 
